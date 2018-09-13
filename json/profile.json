@@ -1,0 +1,19 @@
+{
+  "address": {
+    "houseNumber": "",
+    "street": "",
+    "town": "",
+    "city": "",
+    "postcode": ""
+  },
+  "customer": {
+    "firstName": "",
+    "surname": ""
+  },
+  "carDetails": {
+    "reg": "",
+    "make": "",
+    "model": "",
+    "engineSize": ""
+  }
+}
