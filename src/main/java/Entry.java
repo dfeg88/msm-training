@@ -1,16 +1,34 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Entry {
 
-    private static Profile profileOne;
-    private static Profile profileTwo;
-    private static Profile profileThree;
+    private static List<Profile> profiles = new ArrayList<>();
 
     public static void main (String[] args) {
 
+        writeProfileJsonToTextFile();
+
+    }
+
+    private static void writeProfileJsonToTextFile() {
         createProfiles();
 
-        System.out.println(profileOne.toString());
-        System.out.println(profileTwo.toString());
-        System.out.println(profileThree.toString());
+        profiles.forEach(profile -> {
+            File file = new File(profile.getCustomer().getFirstName() + ".txt");
+            try {
+                file.createNewFile();
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(profile.getCustomer().getFirstName() + ".txt"));
+                bufferedWriter.write(profile.toString());
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 
@@ -27,9 +45,9 @@ public class Entry {
         Car carTwo = new Car("FFF FFF", "Toyota", "Kanban", 7.0);
         Car carThree = new Car("GGG GGG", "Jaguar", "JJJ", 4.2);
 
-        profileOne = new Profile(addressOne, customerOne, carOne);
-        profileTwo = new Profile(addressTwo, customerTwo, carTwo);
-        profileThree = new Profile(addressThree, customerThree, carThree);
+        profiles.add(new Profile(addressOne, customerOne, carOne));
+        profiles.add(new Profile(addressTwo, customerTwo, carTwo));
+        profiles.add(new Profile(addressThree, customerThree, carThree));
     }
 
 }
