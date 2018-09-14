@@ -12,6 +12,15 @@ public class Car {
         this.engineSize = engineSize;
     }
 
+    @Override
+    public String toString() {
+        return
+            " registrationNumber:" + registrationNumber +
+            ", make:" + make +
+            ", model:" + model +
+            ", engineSize:" + engineSize + ", ";
+    }
+
     public String getRegistrationNumber() {
         return registrationNumber;
     }
@@ -42,5 +51,11 @@ public class Car {
 
     public void setEngineSize(double engineSize) {
         this.engineSize = engineSize;
+    }
+
+    private void createCars() {
+        Car carOne = new Car("E57 VKD", "Ford", "Focus", 2.4);
+        Car carTwo = new Car("FFF FFF", "Toyota", "Kanban", 7.0);
+        Car carThree = new Car("GGG GGG", "Jaguar", "JJJ", 4.2);
     }
 }

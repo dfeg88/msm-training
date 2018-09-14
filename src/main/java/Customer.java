@@ -3,11 +3,18 @@ public class Customer {
     private String firstName;
     private String lastName;
 
-    public Customer() {};
+    public Customer() {}
 
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return
+            "firstName: " + firstName +
+            ", lastName: " + lastName + " ";
     }
 
     public String getFirstName() {
@@ -25,4 +32,5 @@ public class Customer {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 }
