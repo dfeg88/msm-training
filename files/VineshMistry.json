@@ -1,0 +1,19 @@
+{
+  "car": {
+    "registrationNumber": "FFF FFF",
+    "make": "Toyota",
+    "model": "Kanban",
+    "engineSize": 7.0
+  },
+  "address": {
+    "houseNumber": "test2",
+    "street": "test2",
+    "town": "test2",
+    "city": "test2",
+    "postcode": "test2"
+  },
+  "customer": {
+    "firstName": "Vinesh",
+    "lastName": "Mistry"
+  }
+}
