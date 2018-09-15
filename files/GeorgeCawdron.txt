@@ -1,0 +1,19 @@
+{
+	carDetails {
+		registrationNumber: GGG GGG,
+		make: Jaguar,
+		model: ?!?!?!,
+		engineSize: 4.2
+	},
+	addressDetails: {
+		houseNumber: test3,
+		street: test3,
+		town: test3,
+		city: test3,
+		postcode: test3
+	},
+	customerDetails: {
+		firstName: George,
+		lastName: Cawdron
+	}
+}

@@ -1,0 +1,19 @@
+{
+	carDetails {
+		registrationNumber: E57 VKD,
+		make: Ford,
+		model: Focus,
+		engineSize: 2.4
+	},
+	addressDetails: {
+		houseNumber: test1,
+		street: test1,
+		town: test1,
+		city: test1,
+		postcode: test1
+	},
+	customerDetails: {
+		firstName: Dan,
+		lastName: Fegan
+	}
+}

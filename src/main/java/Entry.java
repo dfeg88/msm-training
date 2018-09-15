@@ -10,16 +10,14 @@ public class Entry {
     private static List<Profile> profiles = new ArrayList<>();
 
     public static void main (String[] args) {
-
+        createProfiles();
         writeProfileJsonToTextFile();
-
     }
 
     private static void writeProfileJsonToTextFile() {
-        createProfiles();
-
         profiles.forEach(profile -> {
             String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".txt";
+
             File file = new File(FILE_PATH);
             try {
                 if (file.createNewFile()) {
