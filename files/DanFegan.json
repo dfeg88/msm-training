@@ -1,0 +1,19 @@
+{
+  "car": {
+    "registrationNumber": "E57 VKD",
+    "make": "Ford",
+    "model": "Focus",
+    "engineSize": 2.4
+  },
+  "address": {
+    "houseNumber": "test1",
+    "street": "test1",
+    "town": "test1",
+    "city": "test1",
+    "postcode": "test1"
+  },
+  "customer": {
+    "firstName": "Dan",
+    "lastName": "Fegan"
+  }
+}
