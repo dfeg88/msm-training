@@ -19,12 +19,18 @@ public class Entry {
         createProfiles();
 
         profiles.forEach(profile -> {
-            File file = new File(profile.getCustomer().getFirstName() + ".txt");
+            String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".txt";
+            File file = new File(FILE_PATH);
             try {
-                file.createNewFile();
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(profile.getCustomer().getFirstName() + ".txt"));
-                bufferedWriter.write(profile.toString());
-                bufferedWriter.close();
+                if (file.createNewFile()) {
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_PATH));
+                    bufferedWriter.write(profile.toString());
+                    bufferedWriter.close();
+                    System.out.println("File created for customer " + profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName());
+                } else {
+                    System.out.println("File for " + profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName() +  " already exists..");
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
