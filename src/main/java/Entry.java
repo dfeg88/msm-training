@@ -30,7 +30,6 @@ public class Entry {
                 } else {
                     System.out.println("File for " + profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName() +  " already exists..");
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -40,16 +39,16 @@ public class Entry {
 
     private static void createProfiles() {
         Address addressOne = new Address("test1", "test1", "test1", "test1", "test1");
-        Address addressTwo = new Address("test1", "test1", "test1", "test1", "test1");
-        Address addressThree = new Address("test1", "test1", "test1", "test1", "test1");
+        Address addressTwo = new Address("test2", "test2", "test2", "test2", "test2");
+        Address addressThree = new Address("test3", "test3", "test3", "test3", "test3");
 
         Customer customerOne = new Customer("Dan", "Fegan");
-        Customer customerTwo = new Customer("Tom", "Fegan");
-        Customer customerThree = new Customer("Adam", "Fegan");
+        Customer customerTwo = new Customer("Vinesh", "Mistry");
+        Customer customerThree = new Customer("George", "Cawdron");
 
         Car carOne = new Car("E57 VKD", "Ford", "Focus", 2.4);
         Car carTwo = new Car("FFF FFF", "Toyota", "Kanban", 7.0);
-        Car carThree = new Car("GGG GGG", "Jaguar", "JJJ", 4.2);
+        Car carThree = new Car("GGG GGG", "Jaguar", "?!?!?!", 4.2);
 
         profiles.add(new Profile(addressOne, customerOne, carOne));
         profiles.add(new Profile(addressTwo, customerTwo, carTwo));

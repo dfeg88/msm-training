@@ -13,12 +13,12 @@ public class Address {
 
     @Override
     public String toString() {
-        return
-            "houseNumber:" + houseNumber +
-            ", street:" + street +
-            ", town:" + town +
-            ", city:" + city +
-            ", postcode:" + postcode + ", ";
+        return "addressDetails: {\n" +
+            "\t\thouseNumber: " + houseNumber +
+            ",\n\t\tstreet: " + street +
+            ",\n\t\ttown: " + town +
+            ",\n\t\tcity: " + city +
+            ",\n\t\tpostcode: " + postcode + "\n\t},\n";
     }
 
     public String getHouseNumber() {

@@ -13,7 +13,7 @@ public class Profile {
 
     @Override
     public String toString() {
-        return "{" + car + address + customer + " }";
+        return "{\n" + car + address + customer + "\n}";
     }
 
     public Car getCar() {

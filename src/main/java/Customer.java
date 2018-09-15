@@ -12,9 +12,9 @@ public class Customer {
 
     @Override
     public String toString() {
-        return
-            "firstName: " + firstName +
-            ", lastName: " + lastName + " ";
+        return "\tcustomerDetails: {\n" +
+            "\t\tfirstName: " + firstName +
+            ",\n\t\tlastName: " + lastName + "\n\t}";
     }
 
     public String getFirstName() {
