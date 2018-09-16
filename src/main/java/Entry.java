@@ -5,15 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class Entry {
 
     private static List<Profile> profiles = new ArrayList<>();
 
     public static void main (String[] args) {
         createProfiles();
-        writeProfileToJsonFile();
+        writeProfileJsonToTextFile();
     }
 
     private static void writeProfileJsonToTextFile() {
@@ -35,19 +33,6 @@ public class Entry {
             }
         });
 
-    }
-
-    private static void writeProfileToJsonFile() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        profiles.forEach(profile -> {
-            String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".json";
-
-            try {
-                objectMapper.writeValue(new File(FILE_PATH), profile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 
     private static void createProfiles() {
