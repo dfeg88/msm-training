@@ -17,6 +17,7 @@ public class Entry {
     private static void writeProfileJsonToTextFile() {
         profiles.forEach(profile -> {
             String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".txt";
+            String customerName = profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName();
             File file = new File(FILE_PATH);
 
             try {
@@ -24,9 +25,9 @@ public class Entry {
                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_PATH));
                     bufferedWriter.write(profile.toString());
                     bufferedWriter.close();
-                    System.out.println("File created for customer " + profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName());
+                    System.out.println("File created for customer " + customerName);
                 } else {
-                    System.out.println("File for " + profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName() +  " already exists..");
+                    System.out.println("File for " + customerName +  " already exists..");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
