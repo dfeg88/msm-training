@@ -11,8 +11,8 @@ public class ProfileWriter {
     public void writeProfilesToText(List<Profile> profiles) {
         profiles.forEach(profile -> {
             String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".txt";
-            String customerName = profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName();
             File file = new File(FILE_PATH);
+            String customerName = profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName();
 
             try {
                 if (file.createNewFile()) {
