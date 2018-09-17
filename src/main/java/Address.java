@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Address {
     private String houseNumber, street, town, city, postcode;
 
@@ -59,5 +62,15 @@ public class Address {
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
+    }
+
+    public List<Address> createAddresses() {
+        List<Address> addresses = new ArrayList<>();
+
+        addresses.add(new Address("test1", "test1", "test1", "test1", "test1"));
+        addresses.add(new Address("test2", "test2", "test2", "test2", "test2"));
+        addresses.add(new Address("test3", "test3", "test3", "test3", "test3"));
+
+        return addresses;
     }
 }
