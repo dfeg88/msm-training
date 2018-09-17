@@ -25,32 +25,16 @@ public class Car {
         return registrationNumber;
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
     public String getMake() {
         return make;
-    }
-
-    public void setMake(String make) {
-        this.make = make;
     }
 
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
     public double getEngineSize() {
         return engineSize;
-    }
-
-    public void setEngineSize(double engineSize) {
-        this.engineSize = engineSize;
     }
 
 }
