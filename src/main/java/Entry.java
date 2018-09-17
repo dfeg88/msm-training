@@ -4,13 +4,13 @@ import java.util.List;
 public class Entry {
 
     public static void main (String[] args) {
-        ProfileImpl profileImpl = new ProfileImpl();
-        profileImpl.save(createProfiles());
+        ProfileDao profileDao = new ProfileDao();
+        List<Profile> profiles = new ArrayList<>();
+        createProfiles(profiles);
+        profiles.forEach(profile -> profileDao.save(profile));
     }
 
-    private static List<Profile> createProfiles() {
-        List<Profile> profiles = new ArrayList<>();
-
+    private static List<Profile> createProfiles(List<Profile> profiles) {
         profiles.add(new Profile(
             new Address("test1", "test1", "test1", "test1", "test1"),
             new Customer("Dan", "Fegan"),
