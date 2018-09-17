@@ -17,11 +17,11 @@ public class Address {
     @Override
     public String toString() {
         return "addressDetails: {\n" +
-            "\t\thouseNumber: " + houseNumber +
-            ",\n\t\tstreet: " + street +
-            ",\n\t\ttown: " + town +
-            ",\n\t\tcity: " + city +
-            ",\n\t\tpostcode: " + postcode + "\n\t},\n";
+            "\t\thouseNumber: " + getHouseNumber() +
+            ",\n\t\tstreet: " + getStreet() +
+            ",\n\t\ttown: " + getTown() +
+            ",\n\t\tcity: " + getCity() +
+            ",\n\t\tpostcode: " + getPostcode() + "\n\t},\n";
     }
 
     public String getHouseNumber() {

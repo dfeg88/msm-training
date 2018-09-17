@@ -18,10 +18,10 @@ public class Car {
     @Override
     public String toString() {
         return "\tcarDetails {\n" +
-            "\t\tregistrationNumber: " + registrationNumber +
-            ",\n\t\tmake: " + make +
-            ",\n\t\tmodel: " + model +
-            ",\n\t\tengineSize: " + engineSize + "\n\t},\n\t";
+            "\t\tregistrationNumber: " + getRegistrationNumber() +
+            ",\n\t\tmake: " + getMake() +
+            ",\n\t\tmodel: " + getModel() +
+            ",\n\t\tengineSize: " + getEngineSize() + "\n\t},\n\t";
     }
 
     public String getRegistrationNumber() {
