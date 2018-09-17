@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Car {
 
     private String registrationNumber, make, model;
@@ -56,13 +53,4 @@ public class Car {
         this.engineSize = engineSize;
     }
 
-    public List<Car> createCars() {
-        List<Car> cars = new ArrayList<>();
-
-        cars.add(new Car("E57 VKD", "Ford", "Focus", 2.4));
-        cars.add(new Car("FFF FFF", "Toyota", "Kanban", 7.0));
-        cars.add(new Car("GGG GGG", "Jaguar", "?!?!?!", 4.2));
-
-        return cars;
-    }
 }

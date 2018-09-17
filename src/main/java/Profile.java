@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Profile {
     private Car car = new Car();
     private Address address = new Address();
@@ -16,7 +13,7 @@ public class Profile {
 
     @Override
     public String toString() {
-        return "{\n" + car + address + customer + "\n}";
+        return "{\n" + getCar() + getAddress() + getCustomer() + "\n}";
     }
 
     public Car getCar() {
@@ -41,19 +38,5 @@ public class Profile {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public List<Profile> createProfiles() {
-        List<Profile> profiles = new ArrayList<>();
-
-        List<Car> cars = car.createCars();
-        List<Address> addresses = address.createAddresses();
-        List<Customer> customers = customer.createCustomers();
-
-        for (int i = 0; i < 3; i++) {
-            profiles.add(0, new Profile(addresses.get(i), customers.get(i), cars.get(i)));
-        }
-
-        return profiles;
     }
 }

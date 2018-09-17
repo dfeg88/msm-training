@@ -1,19 +1,14 @@
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileWriter {
 
-    private Profile profile = new Profile();
-    private List<Profile> profiles = new ArrayList<>();
-
     public ProfileWriter() {};
 
-    public void writeProfilesToText() {
-        profiles = profile.createProfiles();
-
+    public void writeProfilesToText(List<Profile> profiles) {
         profiles.forEach(profile -> {
             String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".txt";
             String customerName = profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName();
@@ -21,7 +16,7 @@ public class ProfileWriter {
 
             try {
                 if (file.createNewFile()) {
-                    BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(FILE_PATH));
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_PATH));
                     bufferedWriter.write(profile.toString());
                     bufferedWriter.close();
                     System.out.println("File created for customer " + customerName);

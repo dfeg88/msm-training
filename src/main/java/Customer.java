@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Customer {
 
     private String firstName;
@@ -34,16 +31,6 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public List<Customer> createCustomers() {
-        List<Customer> customers = new ArrayList<>();
-
-        customers.add(new Customer("Dan", "Fegan"));
-        customers.add(new Customer("Tom", "Jones"));
-        customers.add(new Customer("Maynard", "Keenan"));
-
-        return customers;
     }
 
 }
