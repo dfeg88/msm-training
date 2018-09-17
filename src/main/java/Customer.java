@@ -13,24 +13,16 @@ public class Customer {
     @Override
     public String toString() {
         return "\tcustomerDetails: {\n" +
-            "\t\tfirstName: " + firstName +
-            ",\n\t\tlastName: " + lastName + "\n\t}";
+            "\t\tfirstName: " + getFirstName() +
+            ",\n\t\tlastName: " + getLastName() + "\n\t}";
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
 }

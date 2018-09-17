@@ -1,71 +1,31 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class Entry {
 
-    private static List<Profile> profiles = new ArrayList<>();
-
     public static void main (String[] args) {
-        createProfiles();
-        writeProfileToJsonFile();
+        ProfileDao profileDao = new ProfileDao();
+        List<Profile> profiles = new ArrayList<>();
+        createProfiles(profiles);
+        profiles.forEach(profile -> profileDao.save(profile));
     }
 
-    private static void writeProfileJsonToTextFile() {
-        profiles.forEach(profile -> {
-            String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".txt";
-            File file = new File(FILE_PATH);
+    private static List<Profile> createProfiles(List<Profile> profiles) {
+        profiles.add(new Profile(
+            new Address("test1", "test1", "test1", "test1", "test1"),
+            new Customer("Dan", "Fegan"),
+            new Car("E57 VKD", "Ford", "Focus", 2.4)));
 
-            try {
-                if (file.createNewFile()) {
-                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_PATH));
-                    bufferedWriter.write(profile.toString());
-                    bufferedWriter.close();
-                    System.out.println("File created for customer " + profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName());
-                } else {
-                    System.out.println("File for " + profile.getCustomer().getFirstName() + " " + profile.getCustomer().getLastName() +  " already exists..");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        profiles.add(new Profile(
+            new Address("test2", "test2", "test2", "test2", "test2"),
+            new Customer("Tom", "Jones"),
+            new Car("E57 VKD", "Ford", "Focus", 2.4)));
 
+        profiles.add(new Profile(
+            new Address("test3", "test3", "test3", "test3", "test3"),
+            new Customer("Stu", "Hayes"),
+            new Car("E57 VKD", "Ford", "Focus", 2.4)));
+
+        return profiles;
     }
-
-    private static void writeProfileToJsonFile() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        profiles.forEach(profile -> {
-            String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".json";
-
-            try {
-                objectMapper.writeValue(new File(FILE_PATH), profile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private static void createProfiles() {
-        Address addressOne = new Address("test1", "test1", "test1", "test1", "test1");
-        Address addressTwo = new Address("test2", "test2", "test2", "test2", "test2");
-        Address addressThree = new Address("test3", "test3", "test3", "test3", "test3");
-
-        Customer customerOne = new Customer("Dan", "Fegan");
-        Customer customerTwo = new Customer("Vinesh", "Mistry");
-        Customer customerThree = new Customer("George", "Cawdron");
-
-        Car carOne = new Car("E57 VKD", "Ford", "Focus", 2.4);
-        Car carTwo = new Car("FFF FFF", "Toyota", "Kanban", 7.0);
-        Car carThree = new Car("GGG GGG", "Jaguar", "?!?!?!", 4.2);
-
-        profiles.add(new Profile(addressOne, customerOne, carOne));
-        profiles.add(new Profile(addressTwo, customerTwo, carTwo));
-        profiles.add(new Profile(addressThree, customerThree, carThree));
-    }
-
 }
