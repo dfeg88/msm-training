@@ -4,11 +4,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class ProfileWriter {
+public class ProfileImpl implements ProfileDao<Profile> {
 
-    public ProfileWriter() {};
+    public ProfileImpl() {};
 
-    public void writeProfilesToText(List<Profile> profiles) {
+    @Override
+    public void save(List<Profile> profiles) {
         profiles.forEach(profile -> {
             String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".txt";
             File file = new File(FILE_PATH);
@@ -28,5 +29,4 @@ public class ProfileWriter {
             }
         });
     }
-
 }

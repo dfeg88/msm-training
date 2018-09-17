@@ -4,8 +4,8 @@ import java.util.List;
 public class Entry {
 
     public static void main (String[] args) {
-        ProfileWriter profileWriter = new ProfileWriter();
-        profileWriter.writeProfilesToText(createProfiles());
+        ProfileImpl profileImpl = new ProfileImpl();
+        profileImpl.save(createProfiles());
     }
 
     private static List<Profile> createProfiles() {
