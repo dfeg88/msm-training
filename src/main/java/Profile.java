@@ -54,8 +54,6 @@ public class Profile {
             profiles.add(0, new Profile(addresses.get(i), customers.get(i), cars.get(i)));
         }
 
-        System.out.print(profiles);
-
         return profiles;
     }
 }
