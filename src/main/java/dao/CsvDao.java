@@ -20,7 +20,7 @@ public class CsvDao {
     public CsvDao() {}
 
     public List<Profile> getProfilesFromCSV() throws IOException {
-        Reader csvReader = new FileReader(FileUtil.getFile("MOCK_DATA.csv"));
+        Reader csvReader = new FileReader(FileUtil.getCsvFile("MOCK_DATA"));
         Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(csvReader);
         List<Profile> profiles = new ArrayList<>();
         records.forEach(record -> profiles.add(new Profile(
