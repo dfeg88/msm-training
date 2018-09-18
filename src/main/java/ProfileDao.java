@@ -9,7 +9,7 @@ import org.apache.commons.csv.CSVRecord;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ProfileDao implements Dao<Profile> {
+public class ProfileDao implements GenericDao<Profile> {
 
     public ProfileDao() {}
 
