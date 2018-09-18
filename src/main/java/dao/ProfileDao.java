@@ -7,9 +7,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Profile;
 
 public class ProfileDao implements GenericDao<Profile> {
+    private ObjectMapper objectMapper;
+
+    public ProfileDao(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     public void save(Profile profile) {
-        ObjectMapper objectMapper = new ObjectMapper();
         String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".json";
 
         try {
