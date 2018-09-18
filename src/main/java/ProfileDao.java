@@ -31,7 +31,7 @@ public class ProfileDao implements Dao<Profile> {
             profiles.add(new Profile(
                 new Address(record.get("houseNumber"), record.get("street"), record.get("town"), record.get("city"), record.get("postcode")),
                 new Customer(record.get("firstName"), record.get("lastName")),
-                new Car(record.get("carRegistration"), record.get("carMake"), record.get("carModel"), Double.valueOf(record.get("carEngineSize")) )
+                new Car(record.get("carRegistration"), record.get("carMake"), record.get("carModel"), Double.valueOf(record.get("carEngineSize")))
             ));
         });
 
