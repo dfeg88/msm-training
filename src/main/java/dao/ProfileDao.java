@@ -8,8 +8,6 @@ import models.Profile;
 
 public class ProfileDao implements GenericDao<Profile> {
 
-    public ProfileDao() {}
-
     public void save(Profile profile) {
         ObjectMapper objectMapper = new ObjectMapper();
         String FILE_PATH = "./files/" + profile.getCustomer().getFirstName() + profile.getCustomer().getLastName() + ".json";
@@ -20,4 +18,5 @@ public class ProfileDao implements GenericDao<Profile> {
             e.printStackTrace();
         }
     }
+
 }
