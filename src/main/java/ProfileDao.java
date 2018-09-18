@@ -25,8 +25,8 @@ public class ProfileDao implements Dao<Profile> {
     }
 
     public List<Profile> getProfilesFromCSV(List<Profile> profiles) throws IOException {
-        Reader in = new FileReader("./resources/MOCK_DATA.csv");
-        Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
+        Reader csvReader = new FileReader("./resources/MOCK_DATA.csv");
+        Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(csvReader);
         records.forEach(record -> {
             profiles.add(new Profile(
                 new Address(record.get("houseNumber"), record.get("street"), record.get("town"), record.get("city"), record.get("postcode")),
