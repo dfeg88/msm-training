@@ -1,7 +1,7 @@
 package util;
 
 public abstract  class FileUtil {
-    public static String getFileName(String fileName) {
+    public static String getFile(String fileName) {
         return "./resources/" + fileName;
     }
 }
