@@ -1,3 +1,5 @@
+package models;
+
 public class Address {
     private String houseNumber, street, town, city, postcode;
 

@@ -1,3 +1,5 @@
+package models;
+
 public class Profile {
     private Car car = new Car();
     private Address address = new Address();

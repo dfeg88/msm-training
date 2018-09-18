@@ -1,3 +1,5 @@
+package models;
+
 public class Car {
 
     private String registrationNumber, make, model;
