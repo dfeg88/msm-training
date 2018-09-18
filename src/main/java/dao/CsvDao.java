@@ -13,13 +13,14 @@ import models.Address;
 import models.Car;
 import models.Customer;
 import models.Profile;
+import util.FileUtil;
 
 public class CsvDao {
 
     public CsvDao() {}
 
     public List<Profile> getProfilesFromCSV() throws IOException {
-        Reader csvReader = new FileReader("./resources/MOCK_DATA.csv");
+        Reader csvReader = new FileReader(FileUtil.getFileName("MOCK_DATA.csv"));
         Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(csvReader);
         List<Profile> profiles = new ArrayList<>();
         records.forEach(record -> profiles.add(new Profile(
