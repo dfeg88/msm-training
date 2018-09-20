@@ -17,11 +17,14 @@ import util.FileUtil;
 
 public class CsvDao {
 
-    public CsvDao() {}
+    private final FileReader fileReader;
+
+    public CsvDao(FileReader fileReader) {
+        this.fileReader = fileReader;
+    }
 
     public List<Profile> getProfilesFromCSV() throws IOException {
-        Reader csvReader = new FileReader(FileUtil.getCsvFile("MOCK_DATA"));
-        Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(csvReader);
+        Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(fileReader);
         List<Profile> profiles = new ArrayList<>();
         records.forEach(record -> profiles.add(new Profile(
             new Address(record.get("houseNumber"), record.get("street"), record.get("town"), record.get("city"), record.get("postcode")),

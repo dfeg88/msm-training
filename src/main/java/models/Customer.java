@@ -1,5 +1,8 @@
 package models;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class Customer {
 
     private String firstName;

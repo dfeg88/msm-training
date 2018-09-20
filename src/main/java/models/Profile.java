@@ -1,5 +1,8 @@
 package models;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class Profile {
     private Car car = new Car();
     private Address address = new Address();
