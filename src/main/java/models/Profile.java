@@ -12,8 +12,6 @@ public class Profile {
     private Address address = new Address();
     private Customer customer = new Customer();
 
-    public Profile() {}
-
     public Profile(Address address, Customer customer, Car car) {
         this.address = address;
         this.customer = customer;
