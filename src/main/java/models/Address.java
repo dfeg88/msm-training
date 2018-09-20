@@ -1,8 +1,12 @@
 package models;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @EqualsAndHashCode
+@Getter
+@Setter
 public class Address {
     private String houseNumber, street, town, city, postcode;
 
@@ -24,25 +28,5 @@ public class Address {
             ",\n\t\ttown: " + getTown() +
             ",\n\t\tcity: " + getCity() +
             ",\n\t\tpostcode: " + getPostcode() + "\n\t},\n";
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getPostcode() {
-        return postcode;
     }
 }

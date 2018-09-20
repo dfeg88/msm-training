@@ -1,8 +1,12 @@
 package models;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @EqualsAndHashCode
+@Getter
+@Setter
 public class Car {
 
     private String registrationNumber, make, model;
@@ -25,21 +29,4 @@ public class Car {
             ",\n\t\tmodel: " + getModel() +
             ",\n\t\tengineSize: " + getEngineSize() + "\n\t},\n\t";
     }
-
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public String getMake() {
-        return make;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public double getEngineSize() {
-        return engineSize;
-    }
-
 }

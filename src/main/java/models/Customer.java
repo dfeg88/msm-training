@@ -1,8 +1,12 @@
 package models;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @EqualsAndHashCode
+@Getter
+@Setter
 public class Customer {
 
     private String firstName;
@@ -21,13 +25,4 @@ public class Customer {
             "\t\tfirstName: " + getFirstName() +
             ",\n\t\tlastName: " + getLastName() + "\n\t}";
     }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
 }
