@@ -42,7 +42,7 @@ public class ProfileDaoTest {
 
     @Test
     @DisplayName("Save profile to .json file")
-    void save_shouldSaveProfile() throws IOException {
+    void save_shouldSaveProfileToFile() throws IOException {
         profileDao.save(profile);
         verify(objectMapper).writeValue(any(File.class), eq(profile));
     }
