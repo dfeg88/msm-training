@@ -1,31 +1,19 @@
-import java.util.ArrayList;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import dao.CsvDao;
+import dao.ProfileDao;
+import models.Profile;
+import util.FileUtil;
 
 public class Entry {
 
-    public static void main (String[] args) {
-        ProfileDao profileDao = new ProfileDao();
-        List<Profile> profiles = new ArrayList<>();
-        createProfiles(profiles);
+    public static void main (String[] args) throws IOException {
+        ProfileDao profileDao = new ProfileDao(new ObjectMapper());
+        CsvDao csvDao = new CsvDao(new FileReader(FileUtil.getCsvFile("MOCK_DATA")));
+        List<Profile> profiles = csvDao.getProfilesFromCSV();
         profiles.forEach(profile -> profileDao.save(profile));
-    }
-
-    private static List<Profile> createProfiles(List<Profile> profiles) {
-        profiles.add(new Profile(
-            new Address("test1", "test1", "test1", "test1", "test1"),
-            new Customer("Dan", "Fegan"),
-            new Car("E57 VKD", "Ford", "Focus", 2.4)));
-
-        profiles.add(new Profile(
-            new Address("test2", "test2", "test2", "test2", "test2"),
-            new Customer("Tom", "Jones"),
-            new Car("E57 VKD", "Ford", "Focus", 2.4)));
-
-        profiles.add(new Profile(
-            new Address("test3", "test3", "test3", "test3", "test3"),
-            new Customer("Stu", "Hayes"),
-            new Car("E57 VKD", "Ford", "Focus", 2.4)));
-
-        return profiles;
     }
 }
