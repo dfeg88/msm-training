@@ -34,11 +34,11 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
 
 //  LOMBOK
-    compile 'org.slf4j:slf4j-api:1.7.21',
+    compile 'org.slf4j:slf4j-api:1.7.25',
             'org.projectlombok:lombok:1.16.20'
 
 //  MONGO
-    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.8.2'
+    compile 'org.mongodb:mongodb-driver-sync:3.8.2'
 
 }
 

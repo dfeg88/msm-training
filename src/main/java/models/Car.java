@@ -1,25 +1,20 @@
 package models;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @EqualsAndHashCode
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Car {
 
     private String registrationNumber, make, model;
     private double engineSize;
-
-    public Car() {};
-
-    public Car(String registrationNumber, String make, String model, double engineSize) {
-        this.registrationNumber = registrationNumber;
-        this.make = make;
-        this.model = model;
-        this.engineSize = engineSize;
-    }
 
     @Override
     public String toString() {
