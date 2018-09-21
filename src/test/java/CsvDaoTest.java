@@ -3,11 +3,9 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,17 +23,11 @@ public class CsvDaoTest {
 
     private CsvDao csvDao;
 
-
-
     @BeforeEach
     void setUp() throws FileNotFoundException {
         csvDao = new CsvDao(new FileReader(FileUtil.getCsvFile("TEST_DATA")));
     }
 
-    /**
-     * 
-     * @throws IOException
-     */
     @Test
     void shouldReadProfilesFromCsvAndReturnAListOfProfiles() throws IOException {
         Profile expectedProfile = new Profile(

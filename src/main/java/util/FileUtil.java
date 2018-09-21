@@ -6,6 +6,6 @@ public abstract  class FileUtil {
     }
 
     public static  String createJsonFile(String firstName, String lastName) {
-        return "./resources/" + firstName + lastName + ".json";
+        return "./files/" + firstName + lastName + ".json";
     }
 }
