@@ -6,10 +6,12 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.IOException;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -35,16 +37,20 @@ public class ProfileDaoTest {
     @BeforeEach
     void setUp() {
         profileDao = new ProfileDao(objectMapper);
-        when(profile.getCustomer()).thenReturn(customer);
-        when(customer.getFirstName()).thenReturn("Dan");
-        when(customer.getLastName()).thenReturn("F");
     }
 
     @Test
     @DisplayName("Save profile to .json file")
     void save_shouldSaveProfileToFile() throws IOException {
+        when(profile.getCustomer()).thenReturn(customer);
+        when(customer.getFirstName()).thenReturn("Dan");
+        when(customer.getLastName()).thenReturn("F");
         profileDao.save(profile);
         verify(objectMapper).writeValue(any(File.class), eq(profile));
     }
 
+    @Test
+    void save_shouldThrowNullPointerException() {
+        Assertions.assertThrows(NullPointerException.class, () -> profileDao.save(null));
+    }
 }
