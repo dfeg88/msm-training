@@ -20,26 +20,31 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MongoConfiguration {
+    private static final String DATABASE = "msm-training";
+    private static final String COLLECTION = "profiles";
 
     private MongoClient mongoClient;
     private CodecRegistry pojoCodecRegistry;
     private MongoCollection<Document> dbCollection;
+    private MongoDatabase database;
 
     public MongoConfiguration() throws IOException {
-        mongoTestConfig();
-    }
-
-    public void mongoTestConfig() throws IOException {
-        mongoClient = MongoClients.create();
-
-        pojoCodecRegistry =
-            fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-            fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-
-        MongoDatabase database = mongoClient.getDatabase("test")
+        createMongoClient();
+        initPojoCodecRegistry();
+        database = mongoClient.getDatabase(DATABASE)
             .withCodecRegistry(pojoCodecRegistry);
 
-        dbCollection = database.getCollection("profiles");
+        dbCollection = database.getCollection(COLLECTION);
+    }
+
+    private void createMongoClient() {
+        mongoClient = MongoClients.create();
+    }
+
+    private void initPojoCodecRegistry() {
+        pojoCodecRegistry =
+            fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
     }
 
 }
