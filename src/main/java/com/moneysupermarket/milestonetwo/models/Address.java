@@ -1,4 +1,4 @@
-package models;
+package com.moneysupermarket.milestonetwo.models;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

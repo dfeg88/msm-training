@@ -1,4 +1,4 @@
-package client;
+package com.moneysupermarket.milestonetwo.client;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -17,11 +17,11 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import dao.CsvDao;
-import models.Profile;
-import util.FileUtil;
+import com.moneysupermarket.milestonetwo.dao.CsvDao;
+import com.moneysupermarket.milestonetwo.models.Profile;
+import com.moneysupermarket.milestonetwo.util.FileUtil;
 
-public class MongoConnection {
+public class MongoConfiguration {
 
     private static final String COLLECTION_PROFILES = "profiles";
 

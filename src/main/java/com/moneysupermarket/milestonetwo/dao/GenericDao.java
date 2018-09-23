@@ -1,4 +1,4 @@
-package dao;
+package com.moneysupermarket.milestonetwo.dao;
 
 import java.util.List;
 import java.util.Optional;

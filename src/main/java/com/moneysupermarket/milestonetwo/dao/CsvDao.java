@@ -1,19 +1,17 @@
-package dao;
+package com.moneysupermarket.milestonetwo.dao;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-import models.Address;
-import models.Car;
-import models.Customer;
-import models.Profile;
-import util.FileUtil;
+import com.moneysupermarket.milestonetwo.models.Address;
+import com.moneysupermarket.milestonetwo.models.Car;
+import com.moneysupermarket.milestonetwo.models.Customer;
+import com.moneysupermarket.milestonetwo.models.Profile;
 
 public class CsvDao {
 
