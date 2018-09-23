@@ -1,27 +1,34 @@
-package config;
+package client;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import models.Address;
-import models.Car;
-import models.Customer;
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.InsertManyOptions;
+import dao.CsvDao;
 import models.Profile;
+import util.FileUtil;
 
-public abstract class MongoConfig {
+public class MongoConnection {
 
     private static final String collectionName = "profiles";
 
-    public static void mongoTestConfig() {
+    public static void mongoTestConfig() throws IOException {
         MongoClient mongoClient = MongoClients.create();
 
         CodecRegistry pojoCodecRegistry =
@@ -32,17 +39,23 @@ public abstract class MongoConfig {
             .withCodecRegistry(pojoCodecRegistry);
 
         MongoCollection<Document> collection = database.getCollection("profiles");
+        collection.drop();
 
-        Profile profile = new Profile(
-            new Address("f", "f", "p", "ggg", "dd"),
-            new Customer("dddd", "ggg"),
-            new Car("fff", "fff", "gg", 2)
-        );
+        List<Profile> profiles;
 
-        Document document = new Document();
-        document.put(collectionName, profile);
+        CsvDao csvDao = new CsvDao(new FileReader(FileUtil.getCsvFile("MOCK_DATA")));
+        profiles = csvDao.getProfilesFromCSV();
 
-        collection.insertOne(document);
+        List<Document> documents = new ArrayList<>();
+
+        profiles.forEach(profile -> {
+            documents.add(new Document(collectionName, profile));
+        });
+
+        collection.insertMany(documents);
+
+        mongoClient.close();
+
     }
 
 }

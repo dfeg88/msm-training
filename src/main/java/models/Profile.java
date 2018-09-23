@@ -8,9 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Profile {
-    private Car car = new Car();
-    private Address address = new Address();
-    private Customer customer = new Customer();
+    private Car car;
+    private Address address;
+    private Customer customer;
 
     public Profile(Address address, Customer customer, Car car) {
         this.address = address;

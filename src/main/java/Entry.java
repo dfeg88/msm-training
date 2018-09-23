@@ -1,13 +1,6 @@
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import config.MongoConfig;
-import dao.CsvDao;
-import dao.ProfileDao;
-import models.Profile;
-import util.FileUtil;
+import client.MongoConnection;
 
 public class Entry {
 
@@ -16,6 +9,6 @@ public class Entry {
 //        CsvDao csvDao = new CsvDao(new FileReader(FileUtil.getCsvFile("MOCK_DATA")));
 //        List<Profile> profiles = csvDao.getProfilesFromCSV();
 //        profiles.forEach(profile -> profileDao.save(profile));
-        MongoConfig.mongoTestConfig();
+        MongoConnection.mongoTestConfig();
     }
 }
