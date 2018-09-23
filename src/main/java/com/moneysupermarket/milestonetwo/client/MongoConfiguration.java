@@ -47,6 +47,8 @@ public class MongoConfiguration {
 
         profiles.forEach(profile -> {
             documents.add(new Document(COLLECTION_PROFILES, profile));
+            System.out.println("Added " + profile.getCustomer().getFirstName() + " " +
+                profile.getCustomer().getLastName() + " to DB");
         });
 
         collection.insertMany(documents);
