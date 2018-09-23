@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Profile;
 
@@ -12,6 +15,18 @@ public class ProfileDao implements GenericDao<Profile> {
 
     public void save(Profile profile) {
         
+    }
+
+    public List<Profile> getAll() {
+        return null;
+    }
+
+    public Optional<Profile> get(String id) {
+        return null;
+    }
+
+    public void delete(Profile profile) {
+
     }
 
 }

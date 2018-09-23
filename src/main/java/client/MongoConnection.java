@@ -23,7 +23,7 @@ import util.FileUtil;
 
 public class MongoConnection {
 
-    private static final String collectionName = "profiles";
+    private static final String COLLECTION_PROFILES = "profiles";
 
     public static void mongoTestConfig() throws IOException {
         MongoClient mongoClient = MongoClients.create();
@@ -46,7 +46,7 @@ public class MongoConnection {
         List<Document> documents = new ArrayList<>();
 
         profiles.forEach(profile -> {
-            documents.add(new Document(collectionName, profile));
+            documents.add(new Document(COLLECTION_PROFILES, profile));
         });
 
         collection.insertMany(documents);
