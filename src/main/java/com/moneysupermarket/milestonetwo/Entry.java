@@ -18,9 +18,15 @@ public class Entry {
         CsvDao csvDao = new CsvDao(new FileReader(FileUtil.getCsvFile("MOCK_DATA")));
         List<Profile> profiles = csvDao.getProfilesFromCSV();
 
+        // M2-Part One
         profiles.forEach(profile -> {
             profileDao.save(profile);
         });
+
+        // M2-Part Two
+        System.out.println("*****************************  PART TWO ***************************");
+        profileDao.getAll();
+        System.out.println("*************************  END OF PART TWO ***********************");
 
         mongoConnection.getMongoClient().close();
     }
