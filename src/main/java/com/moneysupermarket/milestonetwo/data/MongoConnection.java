@@ -1,9 +1,7 @@
-package com.moneysupermarket.milestonetwo.client;
+package com.moneysupermarket.milestonetwo.data;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
-
-import java.io.IOException;
 
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -28,18 +26,20 @@ public class MongoConnection {
     private MongoCollection<Document> dbCollection;
     private MongoDatabase database;
 
-    public MongoConnection() {
+    public MongoConnection( MongoProperties mongoProperties) {
+
+
         mongoClient = MongoClients.create();
 
         // enable pojo to be passed in to Document object
         pojoCodecRegistry =
             fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+            fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
-        database = mongoClient.getDatabase(DATABASE)
+        database = mongoClient.getDatabase(mongoProperties.getDataBase())
             .withCodecRegistry(pojoCodecRegistry);
 
-        dbCollection = database.getCollection(COLLECTION);
+        dbCollection = database.getCollection(mongoProperties.getCollection());
         dbCollection.drop(); // while testing milestone two part one
     }
 }

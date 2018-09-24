@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface GenericDao<T> {
     void save(T t);
 
-    List<T> getAll();
+    void getAll();
 
     Optional<T> get(String id);
 
