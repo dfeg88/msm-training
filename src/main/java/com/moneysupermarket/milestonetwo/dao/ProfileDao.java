@@ -11,6 +11,8 @@ import com.mongodb.Block;
 public class ProfileDao implements GenericDao<Profile> {
     private static final String DOCUMENT_PROFILE = "profile";
 
+    private Block<Document> printBlock = document -> System.out.println(document.toJson());
+
     private MongoConnection mongoConnection;
 
     public ProfileDao(MongoConnection mongoConnection) {
@@ -22,8 +24,11 @@ public class ProfileDao implements GenericDao<Profile> {
     }
 
     public void getAll() {
-        Block<Document> printBlock = document -> System.out.println(document.toJson());
         mongoConnection.getDbCollection().find().forEach(printBlock);
+    }
+
+    public void getLastTenProfiles() {
+        mongoConnection.getDbCollection().find().skip((int) mongoConnection.getDbCollection().countDocuments() - 10).forEach(printBlock);
     }
 
     public Optional<Profile> get(String id) {
