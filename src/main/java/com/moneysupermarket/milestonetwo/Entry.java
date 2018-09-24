@@ -13,7 +13,7 @@ import com.moneysupermarket.milestonetwo.util.FileUtil;
 
 public class Entry {
 
-    public static void main (String[] args) throws IOException {
+    public static void main (String[] args) throws IOException, InterruptedException {
         MongoProperties mongoProperties = MongoProperties.builder()
             .collection("profiles")
             .dataBase("msm-training")
@@ -41,9 +41,15 @@ public class Entry {
 
         // M2 - Part Four
         System.out.println("*****************************  PART FOUR ***************************");
-        profileDao.getProfilesWithCarMakeBmw();
+        profileDao.getProfilesByCarMake("BMW");
         System.out.println("*************************  END OF PART FOUR ***********************");
 
+        // M2 - Part Five
+        System.out.println("*****************************  PART FIVE ***************************");
+        profileDao.getProfilesByPostcode("SK11");
+        System.out.println("*************************  END OF PART FIVE ***********************");
+
+        Thread.sleep(1000);
         mongoConnection.getMongoClient().close();
     }
 }
