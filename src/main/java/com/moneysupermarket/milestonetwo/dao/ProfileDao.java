@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.bson.Document;
 
-import com.moneysupermarket.milestonetwo.client.MongoConnection;
+import com.moneysupermarket.milestonetwo.data.MongoConnection;
 import com.moneysupermarket.milestonetwo.models.Profile;
 import com.mongodb.Block;
 
