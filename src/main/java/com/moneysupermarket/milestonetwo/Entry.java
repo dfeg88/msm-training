@@ -35,9 +35,14 @@ public class Entry {
 //        System.out.println("*************************  END OF PART TWO ***********************");
 
         // M2-Part Three
-        System.out.println("*****************************  PART THREE ***************************");
-        profileDao.getLastTenProfiles();
-        System.out.println("*************************  END OF PART THREE ***********************");
+//        System.out.println("*****************************  PART THREE ***************************");
+//        profileDao.getLastTenProfiles();
+//        System.out.println("*************************  END OF PART THREE ***********************");
+
+        // M2 - Part Four
+        System.out.println("*****************************  PART FOUR ***************************");
+        profileDao.getProfilesWithCarMakeBmw();
+        System.out.println("*************************  END OF PART FOUR ***********************");
 
         mongoConnection.getMongoClient().close();
     }
