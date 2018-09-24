@@ -3,7 +3,7 @@ package com.moneysupermarket.milestonetwo.dao;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -35,7 +35,7 @@ public class ProfileDao implements GenericDao<Profile> {
     }
 
     public List<Document> getAllDocuments() {
-        List<Document> profiles = new LinkedList<>();
+        List<Document> profiles = new ArrayList<>();
         mongoConnection.getDbCollection().find().forEach(
             (Consumer<? super Document>) profile -> profiles.add(profile));
 

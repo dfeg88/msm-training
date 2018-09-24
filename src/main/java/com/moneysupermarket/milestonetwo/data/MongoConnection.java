@@ -26,7 +26,7 @@ public class MongoConnection {
     private MongoCollection<Document> dbCollection;
     private MongoDatabase database;
 
-    public MongoConnection( MongoProperties mongoProperties) {
+    public MongoConnection(MongoProperties mongoProperties) {
         mongoClient = MongoClients.create();
 
         // enable pojo to be passed in to Document object
@@ -38,6 +38,8 @@ public class MongoConnection {
             .withCodecRegistry(pojoCodecRegistry);
 
         dbCollection = database.getCollection(mongoProperties.getCollection());
-        dbCollection.drop(); // while testing milestone two part one
+        dbCollection.drop();
     }
+
+
 }
