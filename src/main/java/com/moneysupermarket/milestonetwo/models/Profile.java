@@ -1,14 +1,16 @@
-package models;
+package com.moneysupermarket.milestonetwo.models;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @EqualsAndHashCode
+@Getter
+@Setter
 public class Profile {
-    private Car car = new Car();
-    private Address address = new Address();
-    private Customer customer = new Customer();
-
-    public Profile() {}
+    private Car car;
+    private Address address;
+    private Customer customer;
 
     public Profile(Address address, Customer customer, Car car) {
         this.address = address;
@@ -21,15 +23,4 @@ public class Profile {
         return "{\n" + getCar() + getAddress() + getCustomer() + "\n}";
     }
 
-    public Car getCar() {
-        return car;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
 }
