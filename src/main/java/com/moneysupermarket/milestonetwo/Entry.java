@@ -30,9 +30,14 @@ public class Entry {
         });
 
         // M2-Part Two
-        System.out.println("*****************************  PART TWO ***************************");
-        profileDao.getAll();
-        System.out.println("*************************  END OF PART TWO ***********************");
+//        System.out.println("*****************************  PART TWO ***************************");
+//        profileDao.getAll();
+//        System.out.println("*************************  END OF PART TWO ***********************");
+
+        // M2-Part Three
+        System.out.println("*****************************  PART THREE ***************************");
+        profileDao.getLastTenProfiles();
+        System.out.println("*************************  END OF PART THREE ***********************");
 
         mongoConnection.getMongoClient().close();
     }
