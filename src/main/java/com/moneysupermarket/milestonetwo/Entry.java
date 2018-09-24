@@ -40,14 +40,14 @@ public class Entry {
 //        System.out.println("*************************  END OF PART THREE ***********************");
 
         // M2 - Part Four
-        System.out.println("*****************************  PART FOUR ***************************");
+        System.out.println("*****************************  PART FOUR ***************************\n\n");
         profileDao.getProfilesByCarMake("BMW");
-        System.out.println("*************************  END OF PART FOUR ***********************");
+        System.out.println("\n\n*************************  END OF PART FOUR ***********************\n\n");
 
         // M2 - Part Five
-        System.out.println("*****************************  PART FIVE ***************************");
+        System.out.println("*****************************  PART FIVE ***************************\n\n");
         profileDao.getProfilesByPostcode("SK11");
-        System.out.println("*************************  END OF PART FIVE ***********************");
+        System.out.println("\n\n*************************  END OF PART FIVE ***********************\n\n");
 
         Thread.sleep(1000);
         mongoConnection.getMongoClient().close();
