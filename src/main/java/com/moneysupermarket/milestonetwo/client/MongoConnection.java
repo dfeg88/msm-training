@@ -40,6 +40,6 @@ public class MongoConnection {
             .withCodecRegistry(pojoCodecRegistry);
 
         dbCollection = database.getCollection(COLLECTION);
-        dbCollection.drop(); // while testing
+        dbCollection.drop(); // while testing milestone two part one
     }
 }
