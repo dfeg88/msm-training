@@ -4,19 +4,14 @@ import com.moneysupermarket.milestonetwo.data.MongoConnection;
 import com.moneysupermarket.milestonetwo.models.Profile;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
-import org.bson.Document;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
 public class ProfileDao implements GenericDao<Profile> {
-    private static final String DOCUMENT_PROFILE = "profile";
 
     private Block<Profile> printBlock = document -> System.out.println(document);
 
