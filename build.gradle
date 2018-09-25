@@ -35,10 +35,6 @@ dependencies {
 
 //  LOMBOK
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 //  MONGO
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.22'
