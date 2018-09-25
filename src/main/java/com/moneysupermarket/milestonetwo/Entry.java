@@ -61,6 +61,10 @@ public class Entry {
         profileDao.getProfilesByPostcode("SK11");
         System.out.println("\n\n*************************  END OF PART FIVE ***********************\n\n");
 
+        Thread.sleep(1000);
+        mongoConnection.getMongoClient().close();
+        Thread.sleep(1000);
+
         // M2 - Part Six
         mongoProperties = MongoProperties.builder()
             .collection("addresses")
