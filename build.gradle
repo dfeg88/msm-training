@@ -22,7 +22,7 @@ dependencies {
 //  TEST
     testCompile("org.junit.jupiter:junit-jupiter-api:${jUnitVersion}")
     testCompile("org.junit.jupiter:junit-jupiter-params:${jUnitVersion}")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine${jUnitVersion}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${jUnitVersion}")
     testCompile("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
     testCompile("org.mockito:mockito-core:${mockitoVersion}")
     testCompile("org.hamcrest:hamcrest-all:${hamcrestVersion}")
@@ -34,7 +34,7 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
 
 //  LOMBOK
-    compile 'org.projectlombok:lombok:1.16.20'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
 
 //  MONGO
     compile 'org.mongodb:mongodb-driver-sync:3.8.2'
