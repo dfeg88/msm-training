@@ -1,37 +1,46 @@
 package com.moneysupermarket.milestonetwo.dao;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moneysupermarket.milestonetwo.data.MongoConnection;
 import com.moneysupermarket.milestonetwo.models.Address;
+import com.moneysupermarket.milestonetwo.models.Profile;
 import com.mongodb.Block;
-import org.bson.Document;
+import com.mongodb.client.FindIterable;
 
 import java.io.IOException;
+import java.util.Optional;
+import java.util.function.Consumer;
 
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 import static com.mongodb.client.model.Projections.fields;
 import static com.mongodb.client.model.Projections.include;
 
-public class AddressDao {
-    private static final String ADDRESS_PROFILE = "address";
-    private Block<Document> printBlock = document -> System.out.println(document.toJson());
+public class AddressDao implements GenericDao<Address> {
+    private Block<Address> printBlock = document -> System.out.println(document);
 
-    private MongoConnection mongoConnection;
+    private MongoConnection<Address> mongoConnection;
 
     public AddressDao(MongoConnection mongoConnection) {
         this.mongoConnection = mongoConnection;
     }
 
-    public void saveAddress(Document document) throws IOException {
-                mongoConnection.getDbCollection().insertOne(
-            new Document(ADDRESS_PROFILE, document)
-        );
+    public void save(Address document) {
+        mongoConnection.getDbCollection().insertOne(document);
     }
 
-    public void getAddresses() {
-        mongoConnection.getDbCollection()
-            .find()
-            .projection(fields(include("address")))
-            .forEach(printBlock);
+    public void getAll() {
+        getAddresses().forEach(printBlock);
     }
 
+    public FindIterable<Address> getAddresses() {
+        return mongoConnection.getDbCollection().find();
+    }
+
+    public Optional<Address> get(String id) {
+        return null;
+    }
+
+    public void delete(Address address) {
+
+    }
 }

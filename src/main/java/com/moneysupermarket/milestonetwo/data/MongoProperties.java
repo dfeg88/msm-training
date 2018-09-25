@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class MongoProperties {
-private String dataBase;
+private String database;
 private String collection;
 }

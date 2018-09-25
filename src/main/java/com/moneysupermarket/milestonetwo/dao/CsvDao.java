@@ -14,19 +14,19 @@ import java.util.List;
 
 public class CsvDao {
 
-    private final FileReader fileReader;
+    private final FileReader file;
 
-    public CsvDao(FileReader fileReader) {
-        this.fileReader = fileReader;
+    public CsvDao(FileReader file) {
+        this.file = file;
     }
 
     public List<Profile> getProfilesFromCSV() throws IOException {
-        Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(fileReader);
+        Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(file);
         List<Profile> profiles = new ArrayList<>();
         records.forEach(record -> profiles.add(new Profile(
             new Address(record.get("houseNumber"), record.get("street"), record.get("town"), record.get("city"), record.get("postcode")),
-            new Customer(record.get("firstName"), record.get("lastName")),
-            new Car(record.get("carRegistration"), record.get("carMake"), record.get("carModel"), Double.valueOf(record.get("carEngineSize")))
+            new Car(record.get("carRegistration"), record.get("carMake"), record.get("carModel"), Double.valueOf(record.get("carEngineSize"))),
+            new Customer(record.get("firstName"), record.get("lastName"))
         )));
 
         return profiles;

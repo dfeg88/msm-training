@@ -1,22 +1,16 @@
 package com.moneysupermarket.milestonetwo.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 @Getter
 @Setter
 public class Profile {
-    private Car car;
     private Address address;
+    private Car car;
     private Customer customer;
-
-    public Profile(Address address, Customer customer, Car car) {
-        this.address = address;
-        this.customer = customer;
-        this.car = car;
-    }
 
     @Override
     public String toString() {
