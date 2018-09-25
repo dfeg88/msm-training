@@ -1,18 +1,23 @@
 package com.moneysupermarket.milestonetwo;
 
+import static com.mongodb.client.model.Projections.fields;
+import static com.mongodb.client.model.Projections.include;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.bson.Document;
 
 import com.moneysupermarket.milestonetwo.dao.AddressDao;
-import com.moneysupermarket.milestonetwo.data.MongoConnection;
-import com.moneysupermarket.milestonetwo.data.MongoProperties;
 import com.moneysupermarket.milestonetwo.dao.CsvDao;
 import com.moneysupermarket.milestonetwo.dao.ProfileDao;
+import com.moneysupermarket.milestonetwo.data.MongoConnection;
+import com.moneysupermarket.milestonetwo.data.MongoProperties;
 import com.moneysupermarket.milestonetwo.models.Profile;
 import com.moneysupermarket.milestonetwo.util.FileUtil;
+import com.mongodb.client.FindIterable;
 
 public class Entry {
 
@@ -60,14 +65,20 @@ public class Entry {
 
         mongoConnection = new MongoConnection(mongoProperties);
         AddressDao addressDao = new AddressDao(mongoConnection);
-        List<Document> documents = profileDao.getAllDocuments();
-        documents.forEach(document -> {
-            try {
-                addressDao.saveAddress(document);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+
+        FindIterable<Document> addresses = profileDao.getDocumentIterable()
+            .projection(fields(include("address")));
+
+        addresses.forEach((Consumer<? super Document>) address -> System.out.println(address.toJson()));
+
+//        List<Document> documents = profileDao.getAllDocuments();
+//        addresses.forEach((Block<? super Document>) document -> {
+//            try {
+//                addressDao.saveAddress(document);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
 
         Thread.sleep(1000);
         mongoConnection.getMongoClient().close();

@@ -1,7 +1,10 @@
 package com.moneysupermarket.milestonetwo.dao;
 
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.regex;
+import com.moneysupermarket.milestonetwo.data.MongoConnection;
+import com.moneysupermarket.milestonetwo.models.Profile;
+import com.mongodb.Block;
+import com.mongodb.client.FindIterable;
+import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +12,8 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
-import org.bson.Document;
-
-import com.moneysupermarket.milestonetwo.data.MongoConnection;
-import com.moneysupermarket.milestonetwo.models.Profile;
-import com.mongodb.Block;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 
 public class ProfileDao implements GenericDao<Profile> {
     private static final String DOCUMENT_PROFILE = "profile";
@@ -31,19 +31,23 @@ public class ProfileDao implements GenericDao<Profile> {
     }
 
     public void getAll() {
-        mongoConnection.getDbCollection().find().forEach(printBlock);
+        getDocumentIterable().forEach(printBlock);
     }
 
     public List<Document> getAllDocuments() {
         List<Document> profiles = new ArrayList<>();
-        mongoConnection.getDbCollection().find().forEach(
+        getDocumentIterable().forEach(
             (Consumer<? super Document>) profile -> profiles.add(profile));
 
         return profiles;
     }
 
+    public FindIterable<Document> getDocumentIterable() {
+        return mongoConnection.getDbCollection().find();
+    }
+
     public void getLastTenProfiles() {
-        mongoConnection.getDbCollection().find().skip((int) mongoConnection.getDbCollection().countDocuments() - 10).forEach(printBlock);
+        getDocumentIterable().skip((int) mongoConnection.getDbCollection().countDocuments() - 10).forEach(printBlock);
     }
 
     public void getProfilesByCarMake(String carMake) {

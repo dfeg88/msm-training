@@ -17,9 +17,6 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 @Getter
 @Setter
 public class MongoConnection {
-    private static final String DATABASE = "msm-training";
-    private static final String COLLECTION = "profiles";
-
     private MongoClient mongoClient;
     private CodecRegistry pojoCodecRegistry;
     private MongoCollection<Document> dbCollection;
