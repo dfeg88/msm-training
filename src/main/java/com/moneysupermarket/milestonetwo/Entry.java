@@ -1,27 +1,19 @@
 package com.moneysupermarket.milestonetwo;
 
-import static com.mongodb.client.model.Projections.excludeId;
-import static com.mongodb.client.model.Projections.fields;
-import static com.mongodb.client.model.Projections.include;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.function.Consumer;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moneysupermarket.milestonetwo.models.Address;
-import com.mongodb.Block;
-import org.bson.Document;
-
 import com.moneysupermarket.milestonetwo.dao.AddressDao;
 import com.moneysupermarket.milestonetwo.dao.CsvDao;
 import com.moneysupermarket.milestonetwo.dao.ProfileDao;
 import com.moneysupermarket.milestonetwo.data.MongoConnection;
 import com.moneysupermarket.milestonetwo.data.MongoProperties;
+import com.moneysupermarket.milestonetwo.models.Address;
 import com.moneysupermarket.milestonetwo.models.Profile;
 import com.moneysupermarket.milestonetwo.util.FileUtil;
+import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
 
 public class Entry {
 
