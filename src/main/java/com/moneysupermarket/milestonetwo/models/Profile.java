@@ -4,9 +4,9 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Profile {
     private Address address;
     private Car car;
