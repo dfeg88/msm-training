@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.Consumer;
 
+import com.moneysupermarket.milestonetwo.models.Address;
+import com.mongodb.Block;
 import org.bson.Document;
 
 import com.moneysupermarket.milestonetwo.dao.AddressDao;
@@ -69,16 +71,18 @@ public class Entry {
         FindIterable<Document> addresses = profileDao.getDocumentIterable()
             .projection(fields(include("address")));
 
-        addresses.forEach((Consumer<? super Document>) address -> System.out.println(address.toJson()));
+        for (Document address: addresses) {
+            System.out.println(address.toJson());
+        }
 
 //        List<Document> documents = profileDao.getAllDocuments();
-//        addresses.forEach((Block<? super Document>) document -> {
-//            try {
-//                addressDao.saveAddress(document);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
+        addresses.forEach((Block<? super Document>) document -> {
+            try {
+                addressDao.saveAddress(document);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         Thread.sleep(1000);
         mongoConnection.getMongoClient().close();

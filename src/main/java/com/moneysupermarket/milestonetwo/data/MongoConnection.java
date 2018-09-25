@@ -36,6 +36,4 @@ public class MongoConnection {
         dbCollection = database.getCollection(mongoProperties.getCollection());
         dbCollection.drop();
     }
-
-
 }

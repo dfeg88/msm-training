@@ -37,7 +37,7 @@ dependencies {
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
 
 //  MONGO
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.22'
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.8.2'
 
 }
 

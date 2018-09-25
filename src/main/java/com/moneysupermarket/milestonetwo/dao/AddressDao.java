@@ -22,12 +22,8 @@ public class AddressDao {
     }
 
     public void saveAddress(Document document) throws IOException {
-        Address address = new ObjectMapper()
-            .readValue(document.get("profile", Document.class)
-                .get("address", Document.class).toJson(), Address.class);
-
-        mongoConnection.getDbCollection().insertOne(
-            new Document(ADDRESS_PROFILE, address)
+                mongoConnection.getDbCollection().insertOne(
+            new Document(ADDRESS_PROFILE, document)
         );
     }
 
