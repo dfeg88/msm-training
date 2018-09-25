@@ -18,6 +18,7 @@ import java.util.List;
 public class Entry {
 
     public static void main (String[] args) throws IOException, InterruptedException {
+        FileUtil fileUtil = new FileUtil();
         // M2-Part One
         MongoProperties mongoProperties = MongoProperties.builder()
             .collection("profiles")
@@ -26,7 +27,7 @@ public class Entry {
 
         MongoConnection mongoConnection = new MongoConnection(mongoProperties, Profile.class);
         ProfileDao profileDao = new ProfileDao(mongoConnection);
-        CsvDao csvDao = new CsvDao(new FileReader(FileUtil.getCsvFile("MOCK_DATA")));
+        CsvDao csvDao = new CsvDao(new FileReader(fileUtil.getCsvFile("MOCK_DATA")));
         List<Profile> profiles = csvDao.getProfilesFromCSV();
 
         profiles.forEach(profile -> {
@@ -52,10 +53,6 @@ public class Entry {
         System.out.println("*****************************  PART FIVE ***************************\n\n");
         profileDao.getProfilesByPostcode("SK11");
         System.out.println("\n\n*************************  END OF PART FIVE ***********************\n\n");
-
-        Thread.sleep(1000);
-        mongoConnection.getMongoClient().close();
-        Thread.sleep(1000);
 
         // M2 - Part Six
         mongoProperties = MongoProperties.builder()
