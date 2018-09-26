@@ -19,7 +19,6 @@ public class Entry {
 
     public static void main (String[] args) throws IOException, InterruptedException {
         FileUtil fileUtil = new FileUtil();
-        // M2-Part One
         MongoProperties mongoProperties = MongoProperties.builder()
             .collection("profiles")
             .database("msm-training")
@@ -34,27 +33,22 @@ public class Entry {
             profileDao.save(profile);
         });
 
-//         M2-Part Two
-        System.out.println("*****************************  PART TWO ***************************\n\n");
+        System.out.println("***************************** PART TWO ***************************\n\n");
         profileDao.getAll();
-        System.out.println("\n\n*************************  END OF PART TWO ***********************\n\n");
+        System.out.println("\n\n*********************  END OF PART TWO ***********************\n\n");
 
-//         M2-Part Three
-        System.out.println("\n\n*****************************  PART THREE ***************************");
+        System.out.println("\n\n************************* PART THREE ***************************");
         profileDao.getLastTenProfiles();
-        System.out.println("\n\n*************************  END OF PART THREE ***********************\n\n");
+        System.out.println("\n\n********************** END OF PART THREE ***********************\n\n");
 
-//         M2 - Part Four
-        System.out.println("*****************************  PART FOUR ***************************\n\n");
+        System.out.println("**************************** PART FOUR ***************************\n\n");
         profileDao.getProfilesByCarMake("BMW");
-        System.out.println("\n\n*************************  END OF PART FOUR ***********************\n\n");
+        System.out.println("\n\n*********************** END OF PART FOUR ***********************\n\n");
 
-//         M2 - Part Five
-        System.out.println("*****************************  PART FIVE ***************************\n\n");
+        System.out.println("****************************  PART FIVE ***************************\n\n");
         profileDao.getProfilesByPostcode("SK11");
-        System.out.println("\n\n*************************  END OF PART FIVE ***********************\n\n");
+        System.out.println("\n\n*********************  END OF PART FIVE ***********************\n\n");
 
-        // M2 - Part Six
         mongoProperties = MongoProperties.builder()
             .collection("addresses")
             .database("msm-training")
