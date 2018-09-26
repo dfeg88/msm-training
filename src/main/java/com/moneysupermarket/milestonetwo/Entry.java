@@ -59,8 +59,10 @@ public class Entry {
         mongoConnection = new MongoConnection(mongoProperties);
         AddressDao addressDao = new AddressDao(mongoConnection.createAddressCollection());
 
-        List<Profile> mongoProfiles = new LinkedList<>();
-        mongoProfiles.forEach(profile -> addressDao.save(profile.getAddress()));
+        List<Profile> mongoProfiles = profileDao.getAll();
+        mongoProfiles.forEach(profile -> {
+            addressDao.save(profile.getAddress());
+        });
 
         Thread.sleep(1000);
         mongoConnection.getMongoClient().close();

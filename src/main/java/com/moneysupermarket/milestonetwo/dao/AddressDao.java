@@ -5,10 +5,12 @@ import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class AddressDao implements GenericDao<Address> {
     private Block<Address> printBlock = System.out::println;
+    private List<Address> addresses = new LinkedList<>();
 
     private MongoCollection<Address> mongoCollection;
 
@@ -21,8 +23,8 @@ public class AddressDao implements GenericDao<Address> {
     }
 
     public List<Address> getAll() {
-        getAddresses().forEach(printBlock);
-        return null;
+        getAddresses().forEach((Block<? super Address>) address -> addresses.add(address));
+        return addresses;
     }
 
     private FindIterable<Address> getAddresses() {
