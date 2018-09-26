@@ -1,11 +1,12 @@
 package com.moneysupermarket.milestonetwo.dao;
 
-import com.moneysupermarket.milestonetwo.data.MongoConnection;
 import com.moneysupermarket.milestonetwo.models.Profile;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
 
-import java.util.Optional;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -14,43 +15,40 @@ import static com.mongodb.client.model.Filters.regex;
 public class ProfileDao implements GenericDao<Profile> {
 
     private Block<Profile> printBlock = document -> System.out.println(document);
+    private List<Profile> profiles = new LinkedList<>();
 
-    private MongoConnection<Profile> mongoConnection;
+    private MongoCollection<Profile> mongoCollection;
 
-    public ProfileDao(MongoConnection mongoConnection) {
-        this.mongoConnection = mongoConnection;
+    public ProfileDao(MongoCollection mongoCollection) {
+        this.mongoCollection = mongoCollection;
     }
 
     public void save(Profile profile) {
-        mongoConnection.getDbCollection().insertOne(profile);
+        mongoCollection.insertOne(profile);
     }
 
-    public void getAll() {
-        getDocumentIterable().forEach(printBlock);
+    public List<Profile> getAll() {
+        getDocumentIterable().forEach((Block<? super Profile>) profile -> profiles.add(profile));
+        return profiles;
     }
 
-    public FindIterable<Profile> getDocumentIterable() {
-        return mongoConnection.getDbCollection().find();
+    private FindIterable<Profile> getDocumentIterable() {
+        return mongoCollection.find();
     }
 
-    public void getLastTenProfiles() {
-        getDocumentIterable().skip((int) mongoConnection.getDbCollection().countDocuments() - 10).forEach(printBlock);
+    public List<Profile> getLastTenProfiles() {
+        getDocumentIterable().skip((int) mongoCollection.countDocuments() - 10).forEach((Block<? super Profile>) profile -> profiles.add(profile));
+        return profiles;
     }
 
-    public void getProfilesByCarMake(String carMake) {
-        mongoConnection.getDbCollection().find(eq("car.make", carMake)).forEach(printBlock);
+    public List<Profile> getProfilesByCarMake(String carMake) {
+        mongoCollection.find(eq("car.make", carMake)).forEach((Block<? super Profile>) profile -> profiles.add(profile));
+        return profiles;
     }
 
-    public void getProfilesByPostcode(String postcode) {
-        mongoConnection.getDbCollection().find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode))).forEach(printBlock);
-    }
-
-    public Optional<Profile> get(String id) {
-        return null;
-    }
-
-    public void delete(Profile profile) {
-
+    public List<Profile> getProfilesByPostcode(String postcode) {
+        mongoCollection.find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode))).forEach((Block<? super Profile>) profile -> profiles.add(profile));
+        return profiles;
     }
 
 }
