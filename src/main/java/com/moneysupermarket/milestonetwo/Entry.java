@@ -39,7 +39,7 @@ public class Entry {
         System.out.println(profileDao.getAll());
         System.out.println("\n\n*********************  END OF PART TWO ***********************\n\n");
 
-        System.out.println("\n\n************************* PART THREE ***************************");
+        System.out.println("\n\n************************* PART THREE ***************************\n\n");
         System.out.println(profileDao.getLastTenProfiles());
         System.out.println("\n\n********************** END OF PART THREE ***********************\n\n");
 
@@ -48,7 +48,7 @@ public class Entry {
         System.out.println("\n\n*********************** END OF PART FOUR ***********************\n\n");
 
         System.out.println("****************************  PART FIVE ***************************\n\n");
-        System.out.println(profileDao.getProfilesByPostcode("SK11"));
+        System.out.println(profileDao.getProfilesByPostcode("sk11"));
         System.out.println("\n\n*********************  END OF PART FIVE ***********************\n\n");
 
         mongoProperties = MongoProperties.builder()

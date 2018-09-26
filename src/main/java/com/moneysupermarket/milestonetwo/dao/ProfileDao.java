@@ -14,9 +14,6 @@ import static com.mongodb.client.model.Filters.regex;
 
 public class ProfileDao implements GenericDao<Profile> {
 
-    private Block<Profile> printBlock = document -> System.out.println(document);
-    private List<Profile> profiles = new LinkedList<>();
-
     private MongoCollection<Profile> mongoCollection;
 
     public ProfileDao(MongoCollection mongoCollection) {
@@ -28,25 +25,25 @@ public class ProfileDao implements GenericDao<Profile> {
     }
 
     public List<Profile> getAll() {
-        getDocumentIterable().forEach((Block<? super Profile>) profile -> profiles.add(profile));
+        List<Profile> profiles = new LinkedList<>();
+        mongoCollection.find().forEach((Block<? super Profile>) profile -> profiles.add(profile));
         return profiles;
     }
 
-    private FindIterable<Profile> getDocumentIterable() {
-        return mongoCollection.find();
-    }
-
     public List<Profile> getLastTenProfiles() {
-        getDocumentIterable().skip((int) mongoCollection.countDocuments() - 10).forEach((Block<? super Profile>) profile -> profiles.add(profile));
+        List<Profile> profiles = new LinkedList<>();
+        mongoCollection.find().skip((int) mongoCollection.countDocuments() - 10).forEach((Block<? super Profile>) profile -> profiles.add(profile));
         return profiles;
     }
 
     public List<Profile> getProfilesByCarMake(String carMake) {
+        List<Profile> profiles = new LinkedList<>();
         mongoCollection.find(eq("car.make", carMake)).forEach((Block<? super Profile>) profile -> profiles.add(profile));
         return profiles;
     }
 
     public List<Profile> getProfilesByPostcode(String postcode) {
+        List<Profile> profiles = new LinkedList<>();
         mongoCollection.find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode))).forEach((Block<? super Profile>) profile -> profiles.add(profile));
         return profiles;
     }
