@@ -1,7 +1,5 @@
 package com.moneysupermarket.milestonetwo.dao;
 
-import com.moneysupermarket.milestonetwo.data.MongoConnection;
-import com.moneysupermarket.milestonetwo.data.MongoProperties;
 import com.moneysupermarket.milestonetwo.models.Address;
 import com.mongodb.client.MongoCollection;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class AddressDaoTest{
