@@ -24,8 +24,9 @@ public class Entry {
             .database("msm-training")
             .build();
 
-        MongoConnection mongoConnection = new MongoConnection(mongoProperties, Profile.class);
-        ProfileDao profileDao = new ProfileDao(mongoConnection);
+        MongoConnection mongoConnection = new MongoConnection(mongoProperties);
+        mongoConnection.dropDatabase();
+        ProfileDao profileDao = new ProfileDao(mongoConnection.createProfileCollection());
         CsvDao csvDao = new CsvDao(new FileReader(fileUtil.getCsvFile("MOCK_DATA")));
         List<Profile> profiles = csvDao.getProfilesFromCSV();
 
@@ -54,11 +55,11 @@ public class Entry {
             .database("msm-training")
             .build();
 
-        mongoConnection = new MongoConnection(mongoProperties, Address.class);
-        AddressDao addressDao = new AddressDao(mongoConnection);
+        mongoConnection = new MongoConnection(mongoProperties);
+        AddressDao addressDao = new AddressDao(mongoConnection.createAddressCollection());
 
-        FindIterable<Profile> addresses = profileDao.getDocumentIterable();
-        addresses.forEach((Block<? super Profile>) document -> addressDao.save(document.getAddress()));
+        FindIterable<Profile> profile = profileDao.getDocumentIterable();
+        profile.forEach((Block<? super Profile>) address -> addressDao.save(address.getAddress()));
 
         Thread.sleep(1000);
         mongoConnection.getMongoClient().close();

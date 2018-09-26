@@ -3,45 +3,36 @@ package com.moneysupermarket.milestonetwo.dao;
 import com.moneysupermarket.milestonetwo.data.MongoConnection;
 import com.moneysupermarket.milestonetwo.data.MongoProperties;
 import com.moneysupermarket.milestonetwo.models.Address;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
+import com.mongodb.client.MongoCollection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class AddressDaoTest{
 
-    private AddressDao addressDao;
+    private AddressDao underTest;
 
     @Mock
-    private MongoConnection mongoConnection;
+    private MongoCollection<Address> mongoCollection;
 
     @Mock
     private Address address;
 
     @BeforeEach
     void setUp() {
-        MongoProperties mongoProperties = MongoProperties.builder()
-                .collection("addresses")
-                .database("msm-training-test")
-                .build();
-
-        mongoConnection = new MongoConnection(mongoProperties, Address.class);
-    }
-
-    @AfterEach
-    void tearDown() {
-        mongoConnection.getMongoClient().close();
+        underTest = new AddressDao(mongoCollection);
     }
 
     @Test
     void test_save_shouldWriteAddressesToDatabase() {
-        Assertions.assertNotNull(mongoConnection.getDatabase());
-        Assertions.assertNotNull(mongoConnection.getDbCollection());
-        verify(addressDao).save(address);
+        underTest.save(address);
+        verify(mongoCollection).insertOne(address);
     }
 
     @Test

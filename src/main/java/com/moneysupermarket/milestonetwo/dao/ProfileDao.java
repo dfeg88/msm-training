@@ -4,6 +4,7 @@ import com.moneysupermarket.milestonetwo.data.MongoConnection;
 import com.moneysupermarket.milestonetwo.models.Profile;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
 
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -15,14 +16,14 @@ public class ProfileDao implements GenericDao<Profile> {
 
     private Block<Profile> printBlock = document -> System.out.println(document);
 
-    private MongoConnection<Profile> mongoConnection;
+    private MongoCollection<Profile> mongoCollection;
 
-    public ProfileDao(MongoConnection mongoConnection) {
-        this.mongoConnection = mongoConnection;
+    public ProfileDao(MongoCollection mongoCollection) {
+        this.mongoCollection = mongoCollection;
     }
 
     public void save(Profile profile) {
-        mongoConnection.getDbCollection().insertOne(profile);
+        mongoCollection.insertOne(profile);
     }
 
     public void getAll() {
@@ -30,19 +31,19 @@ public class ProfileDao implements GenericDao<Profile> {
     }
 
     public FindIterable<Profile> getDocumentIterable() {
-        return mongoConnection.getDbCollection().find();
+        return mongoCollection.find();
     }
 
     public void getLastTenProfiles() {
-        getDocumentIterable().skip((int) mongoConnection.getDbCollection().countDocuments() - 10).forEach(printBlock);
+        getDocumentIterable().skip((int) mongoCollection.countDocuments() - 10).forEach(printBlock);
     }
 
     public void getProfilesByCarMake(String carMake) {
-        mongoConnection.getDbCollection().find(eq("car.make", carMake)).forEach(printBlock);
+        mongoCollection.find(eq("car.make", carMake)).forEach(printBlock);
     }
 
     public void getProfilesByPostcode(String postcode) {
-        mongoConnection.getDbCollection().find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode))).forEach(printBlock);
+        mongoCollection.find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode))).forEach(printBlock);
     }
 
     public Optional<Profile> get(String id) {
