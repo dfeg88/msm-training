@@ -5,10 +5,10 @@ import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
-import java.util.Optional;
+import java.util.List;
 
 public class AddressDao implements GenericDao<Address> {
-    private Block<Address> printBlock = document -> System.out.println(document);
+    private Block<Address> printBlock = System.out::println;
 
     private MongoCollection<Address> mongoCollection;
 
@@ -20,19 +20,12 @@ public class AddressDao implements GenericDao<Address> {
         mongoCollection.insertOne(address);
     }
 
-    public void getAll() {
+    public List<Address> getAll() {
         getAddresses().forEach(printBlock);
+        return null;
     }
 
     private FindIterable<Address> getAddresses() {
         return mongoCollection.find();
-    }
-
-    public Optional<Address> get(String id) {
-        return null;
-    }
-
-    public void delete(Address address) {
-
     }
 }

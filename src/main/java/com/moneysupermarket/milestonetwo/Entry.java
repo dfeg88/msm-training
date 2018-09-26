@@ -13,6 +13,7 @@ import com.mongodb.client.FindIterable;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Entry {
@@ -28,26 +29,26 @@ public class Entry {
         mongoConnection.dropDatabase();
         ProfileDao profileDao = new ProfileDao(mongoConnection.createProfileCollection());
         CsvDao csvDao = new CsvDao(new FileReader(fileUtil.getCsvFile("MOCK_DATA")));
-        List<Profile> profiles = csvDao.getProfilesFromCSV();
+        List<Profile> profilesFromCSV = csvDao.getProfilesFromCSV();
 
-        profiles.forEach(profile -> {
+        profilesFromCSV.forEach(profile -> {
             profileDao.save(profile);
         });
 
         System.out.println("***************************** PART TWO ***************************\n\n");
-        profileDao.getAll();
+        System.out.println(profileDao.getAll());
         System.out.println("\n\n*********************  END OF PART TWO ***********************\n\n");
 
         System.out.println("\n\n************************* PART THREE ***************************");
-        profileDao.getLastTenProfiles();
+        System.out.println(profileDao.getLastTenProfiles());
         System.out.println("\n\n********************** END OF PART THREE ***********************\n\n");
 
         System.out.println("**************************** PART FOUR ***************************\n\n");
-        profileDao.getProfilesByCarMake("BMW");
+        System.out.println(profileDao.getProfilesByCarMake("BMW"));
         System.out.println("\n\n*********************** END OF PART FOUR ***********************\n\n");
 
         System.out.println("****************************  PART FIVE ***************************\n\n");
-        profileDao.getProfilesByPostcode("SK11");
+        System.out.println(profileDao.getProfilesByPostcode("SK11"));
         System.out.println("\n\n*********************  END OF PART FIVE ***********************\n\n");
 
         mongoProperties = MongoProperties.builder()
@@ -58,8 +59,8 @@ public class Entry {
         mongoConnection = new MongoConnection(mongoProperties);
         AddressDao addressDao = new AddressDao(mongoConnection.createAddressCollection());
 
-        FindIterable<Profile> profile = profileDao.getDocumentIterable();
-        profile.forEach((Block<? super Profile>) address -> addressDao.save(address.getAddress()));
+        List<Profile> mongoProfiles = new LinkedList<>();
+        mongoProfiles.forEach(profile -> addressDao.save(profile.getAddress()));
 
         Thread.sleep(1000);
         mongoConnection.getMongoClient().close();
