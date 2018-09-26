@@ -8,7 +8,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ProfileDaoTest {
@@ -20,6 +23,9 @@ class ProfileDaoTest {
 
     @Mock
     private Profile profile;
+
+    @Mock
+    private List<Profile> profiles;
 
     @BeforeEach
     void setUp() {
@@ -34,7 +40,7 @@ class ProfileDaoTest {
 
     @Test
     void getAll() {
-
+//        when(underTest.getAll()).thenReturn(profiles);
     }
 
     @Test

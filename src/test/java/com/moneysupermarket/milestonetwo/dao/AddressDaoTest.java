@@ -31,8 +31,4 @@ class AddressDaoTest{
         underTest.save(address);
         verify(mongoCollection).insertOne(address);
     }
-
-    @Test
-    void getAll() {
-    }
 }

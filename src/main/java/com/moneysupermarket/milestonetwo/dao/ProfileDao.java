@@ -27,24 +27,31 @@ public class ProfileDao implements GenericDao<Profile> {
     public List<Profile> getAll() {
         List<Profile> profiles = new LinkedList<>();
         mongoCollection.find().forEach((Block<? super Profile>) profile -> profiles.add(profile));
+
         return profiles;
     }
 
     public List<Profile> getLastTenProfiles() {
         List<Profile> profiles = new LinkedList<>();
-        mongoCollection.find().skip((int) mongoCollection.countDocuments() - 10).forEach((Block<? super Profile>) profile -> profiles.add(profile));
+        mongoCollection.find().skip((int) mongoCollection.countDocuments() - 10)
+                .forEach((Block<? super Profile>) profile -> profiles.add(profile));
+
         return profiles;
     }
 
     public List<Profile> getProfilesByCarMake(String carMake) {
         List<Profile> profiles = new LinkedList<>();
-        mongoCollection.find(eq("car.make", carMake)).forEach((Block<? super Profile>) profile -> profiles.add(profile));
+        mongoCollection.find(eq("car.make", carMake))
+                .forEach((Block<? super Profile>) profile -> profiles.add(profile));
+
         return profiles;
     }
 
     public List<Profile> getProfilesByPostcode(String postcode) {
         List<Profile> profiles = new LinkedList<>();
-        mongoCollection.find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode))).forEach((Block<? super Profile>) profile -> profiles.add(profile));
+        mongoCollection.find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode)))
+                .forEach((Block<? super Profile>) profile -> profiles.add(profile));
+
         return profiles;
     }
 

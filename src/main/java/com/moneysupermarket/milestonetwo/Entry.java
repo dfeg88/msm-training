@@ -31,9 +31,7 @@ public class Entry {
         CsvDao csvDao = new CsvDao(new FileReader(fileUtil.getCsvFile("MOCK_DATA")));
         List<Profile> profilesFromCSV = csvDao.getProfilesFromCSV();
 
-        profilesFromCSV.forEach(profile -> {
-            profileDao.save(profile);
-        });
+        profilesFromCSV.forEach(profile -> profileDao.save(profile));
 
         System.out.println("***************************** PART TWO ***************************\n\n");
         System.out.println(profileDao.getAll());
@@ -60,9 +58,7 @@ public class Entry {
         AddressDao addressDao = new AddressDao(mongoConnection.createAddressCollection());
 
         List<Profile> mongoProfiles = profileDao.getAll();
-        mongoProfiles.forEach(profile -> {
-            addressDao.save(profile.getAddress());
-        });
+        mongoProfiles.forEach(profile -> addressDao.save(profile.getAddress()));
 
         Thread.sleep(1000);
         mongoConnection.getMongoClient().close();
