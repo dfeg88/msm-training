@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import static org.mockito.Mockito.verify;
+
 class AddressDaoTest{
 
     private AddressDao addressDao;
@@ -38,7 +40,7 @@ class AddressDaoTest{
     void test_save_shouldWriteAddressesToDatabase() {
         Assertions.assertNotNull(mongoConnection.getDatabase());
         Assertions.assertNotNull(mongoConnection.getDbCollection());
-
+        verify(addressDao).save(address);
     }
 
     @Test
