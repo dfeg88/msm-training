@@ -33,19 +33,20 @@ public class Entry {
 
         MongoConnection mongoConnection = new MongoConnection(mongoProperties);
         mongoConnection.dropDatabase();
+        Thread.sleep(1000);
 
         // Part One
         ProfileDao profileDao = new ProfileDao(mongoConnection.createProfileCollection());
         CsvDao csvDao = new CsvDao(new FileReader(fileUtil.getCsvFile(CSV_MOCK_DATA)));
         List<Profile> profilesFromCSV = csvDao.getProfilesFromCSV();
         profilesFromCSV.forEach(csvProfile -> profileDao.save(csvProfile));
-
-        System.out.println(profileDao.getAll()); // Part One
-
+        System.out.println("\n\n");
+//        System.out.println(profileDao.getAll()); // Part One
+        System.out.println("\n\n");
         System.out.println(profileDao.getLastTenProfiles()); // Part Two
-
+        System.out.println("\n\n");
         System.out.println(profileDao.getProfilesByCarMake("BMW")); // Part Three
-
+        System.out.println("\n\n");
         System.out.println(profileDao.getProfilesByPostcode("sk11")); // Part Four
 
         // Part Five
