@@ -45,19 +45,19 @@ class ProfileDaoTest {
     }
 
     @Test
-    void save() {
+    void test_save_verifySaveMethodIsSuccessful() {
         underTest.save(profile);
         verify(mongoCollection).insertOne(profile);
     }
 
     @Test
-    void getAll() {
+    void test_getAll_success() {
         when(mongoCollection.find()).thenReturn(profileFindIterable);
         assertNotNull(underTest.getAll());
     }
 
     @Test
-    void getLastTenProfiles() {
+    void test_getLastTenProfiles_success() {
         when(mongoCollection.countDocuments()).thenReturn(11L);
         when(mongoCollection.find()).thenReturn(profileFindIterable);
         when(profileFindIterable.skip(anyInt())).thenReturn(profileFindIterable);
@@ -67,7 +67,7 @@ class ProfileDaoTest {
     }
 
     @Test
-    void getProfilesByCarMake() {
+    void test_getProfilesByCarMake_verifyArgs() {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         when(mongoCollection.find(any(Bson.class))).thenReturn(profileFindIterable);
         when(profileFindIterable.into(anyList())).thenReturn(profileList);
@@ -78,7 +78,7 @@ class ProfileDaoTest {
     }
 
     @Test
-    void getProfilesByPostcode() {
+    void test_getProfilesByPostcode() {
         when(mongoCollection.find(any(Bson.class))).thenReturn(profileFindIterable);
         when(profileFindIterable.into(anyList())).thenReturn(profileList);
 
