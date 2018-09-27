@@ -43,6 +43,7 @@ public class Entry {
         System.out.println("\n\n");
 //        System.out.println(profileDao.getAll()); // Part One
         System.out.println("\n\n");
+        System.out.println("*************************************");
         System.out.println(profileDao.getLastTenProfiles()); // Part Two
         System.out.println("\n\n");
         System.out.println(profileDao.getProfilesByCarMake("BMW")); // Part Three

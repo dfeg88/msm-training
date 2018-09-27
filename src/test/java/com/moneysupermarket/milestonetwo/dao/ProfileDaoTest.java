@@ -1,34 +1,43 @@
 package com.moneysupermarket.milestonetwo.dao;
 
-import com.moneysupermarket.milestonetwo.models.Address;
-import com.moneysupermarket.milestonetwo.models.Car;
-import com.moneysupermarket.milestonetwo.models.Customer;
 import com.moneysupermarket.milestonetwo.models.Profile;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import org.junit.jupiter.api.Assertions;
+import org.bson.conversions.Bson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.LinkedList;
 import java.util.List;
 
+import static com.mongodb.client.model.Filters.eq;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ProfileDaoTest {
 
+    private static final String CAR_MAKE = "BMW";
+
     private ProfileDao underTest;
-    private List<Profile> profiles = new LinkedList<>();
+
+    @Mock
+    private FindIterable<Profile> profileFindIterable;
 
     @Mock
     MongoCollection<Profile> mongoCollection;
 
     @Mock
     private Profile profile;
+
+    @Mock
+    private List<Profile> profileList;
 
     @BeforeEach
     void setUp() {
@@ -43,26 +52,36 @@ class ProfileDaoTest {
 
     @Test
     void getAll() {
-        profiles.add(new Profile(
-                new Address("test1", "test1", "test1", "test1", "test1"),
-                new Car("E57 VKD", "Ford", "Focus", 2.4),
-                new Customer("Dan", "Fegan")
-        ));
-
-        when(underTest.getAll()).thenReturn(profiles);
-        Assertions.assertNotNull(underTest.getAll());
-//        verify(mongoCollection).find();
+        when(mongoCollection.find()).thenReturn(profileFindIterable);
+        assertNotNull(underTest.getAll());
     }
 
     @Test
     void getLastTenProfiles() {
+        when(mongoCollection.countDocuments()).thenReturn(11L);
+        when(mongoCollection.find()).thenReturn(profileFindIterable);
+        when(profileFindIterable.skip(anyInt())).thenReturn(profileFindIterable);
+        when(profileFindIterable.into(anyList())).thenReturn(profileList);
+
+        assertThat(underTest.getLastTenProfiles()).isEqualTo(profileList);
     }
 
     @Test
     void getProfilesByCarMake() {
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        when(mongoCollection.find(any(Bson.class))).thenReturn(profileFindIterable);
+        when(profileFindIterable.into(anyList())).thenReturn(profileList);
+
+        underTest.getProfilesByCarMake(CAR_MAKE);
+
+        verify(mongoCollection).find(eq("car.make", captor.capture()));
     }
 
     @Test
     void getProfilesByPostcode() {
+        when(mongoCollection.find(any(Bson.class))).thenReturn(profileFindIterable);
+        when(profileFindIterable.into(anyList())).thenReturn(profileList);
+
+        assertNotNull(underTest.getProfilesByPostcode("SK11"));
     }
 }

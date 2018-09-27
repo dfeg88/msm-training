@@ -5,6 +5,7 @@ import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -25,34 +26,28 @@ public class ProfileDao implements GenericDao<Profile> {
     }
 
     public List<Profile> getAll() {
-        List<Profile> profiles = new LinkedList<>();
-        mongoCollection.find().forEach((Block<? super Profile>) profile -> profiles.add(profile));
-
-        return profiles;
+        return mongoCollection
+                .find()
+                .into(new ArrayList<>());
     }
 
     public List<Profile> getLastTenProfiles() {
-        List<Profile> profiles = new LinkedList<>();
-        mongoCollection.find().skip((int) mongoCollection.countDocuments() - 10)
-                .forEach((Block<? super Profile>) profile -> profiles.add(profile));
-
-        return profiles;
+       return mongoCollection
+               .find()
+               .skip((int) mongoCollection.countDocuments() - 10)
+               .into(new ArrayList<>());
     }
 
     public List<Profile> getProfilesByCarMake(String carMake) {
-        List<Profile> profiles = new LinkedList<>();
-        mongoCollection.find(eq("car.make", carMake))
-                .forEach((Block<? super Profile>) profile -> profiles.add(profile));
-
-        return profiles;
+        return mongoCollection
+                .find(eq("car.make", carMake))
+                .into(new ArrayList<>());
     }
 
     public List<Profile> getProfilesByPostcode(String postcode) {
-        List<Profile> profiles = new LinkedList<>();
-        mongoCollection.find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode)))
-                .forEach((Block<? super Profile>) profile -> profiles.add(profile));
-
-        return profiles;
+        return mongoCollection
+                .find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode)))
+                .into(new ArrayList<>());
     }
 
 }
