@@ -82,6 +82,6 @@ class ProfileDaoTest {
         when(mongoCollection.find(any(Bson.class))).thenReturn(profileFindIterable);
         when(profileFindIterable.into(anyList())).thenReturn(profileList);
 
-        assertNotNull(underTest.getProfilesByPostcode("SK11"));
+        assertThat(underTest.getProfilesByPostcode(anyString())).isEqualTo(profileList);
     }
 }
