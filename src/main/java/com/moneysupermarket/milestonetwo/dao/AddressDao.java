@@ -4,12 +4,11 @@ import com.moneysupermarket.milestonetwo.models.Address;
 import com.mongodb.Block;
 import com.mongodb.client.MongoCollection;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class AddressDao implements GenericDao<Address> {
-    private List<Address> addresses = new LinkedList<>();
-
     private MongoCollection<Address> mongoCollection;
 
     public AddressDao(MongoCollection<Address> mongoCollection) {
@@ -21,7 +20,6 @@ public class AddressDao implements GenericDao<Address> {
     }
 
     public List<Address> getAll() {
-        mongoCollection.find().forEach((Block<? super Address>) address -> addresses.add(address));
-        return addresses;
+        return mongoCollection.find().into(new ArrayList<>());
     }
 }
