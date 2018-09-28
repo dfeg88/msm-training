@@ -32,7 +32,7 @@ public class Entry {
             .build();
 
         MongoConnection mongoConnection = new MongoConnection(mongoProperties);
-        mongoConnection.dropDatabase();
+        mongoConnection.dropDatabase(); // for testing purposes
         Thread.sleep(1000);
 
         // Part One
@@ -41,15 +41,15 @@ public class Entry {
         List<Profile> profilesFromCSV = csvDao.getProfilesFromCSV();
         profilesFromCSV.forEach(csvProfile -> profileDao.save(csvProfile));
         System.out.println("\n\n");
-        System.out.println(profileDao.getAll()); // Part One
+        System.out.println(profileDao.getAll()); // Part Two
         System.out.println("\n\n");
-        System.out.println(profileDao.getLastTenProfiles()); // Part Two
+        System.out.println(profileDao.getLastTenProfiles()); // Part Three
         System.out.println("\n\n");
-        System.out.println(profileDao.getProfilesByCarMake("BMW")); // Part Three
+        System.out.println(profileDao.getProfilesByCarMake("BMW")); // Part Four
         System.out.println("\n\n");
-        System.out.println(profileDao.getProfilesByPostcode("sk11")); // Part Four
+        System.out.println(profileDao.getProfilesByPostcode("sk11")); // Part Five
 
-        // Part Five
+        // Part Six
         mongoProperties.setCollection(COLLECTION_ADDRESSES);
 
         mongoConnection = new MongoConnection(mongoProperties);

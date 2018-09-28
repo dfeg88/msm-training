@@ -25,8 +25,9 @@ public class MongoConnection<T> {
     private MongoProperties mongoProperties;
 
     public MongoConnection(MongoProperties mongoProperties) {
-        mongoClient = MongoClients.create();
         this.mongoProperties = mongoProperties;
+
+        mongoClient = MongoClients.create();
 
         // enable pojo to be passed in to Document object
         pojoCodecRegistry =
