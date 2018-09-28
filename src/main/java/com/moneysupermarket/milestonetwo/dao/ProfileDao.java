@@ -5,6 +5,7 @@ import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -13,9 +14,6 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
 public class ProfileDao implements GenericDao<Profile> {
-
-    private Block<Profile> printBlock = document -> System.out.println(document);
-    private List<Profile> profiles = new LinkedList<>();
 
     private MongoCollection<Profile> mongoCollection;
 
@@ -28,27 +26,28 @@ public class ProfileDao implements GenericDao<Profile> {
     }
 
     public List<Profile> getAll() {
-        getDocumentIterable().forEach((Block<? super Profile>) profile -> profiles.add(profile));
-        return profiles;
-    }
-
-    private FindIterable<Profile> getDocumentIterable() {
-        return mongoCollection.find();
+        return mongoCollection
+                .find()
+                .into(new ArrayList<>());
     }
 
     public List<Profile> getLastTenProfiles() {
-        getDocumentIterable().skip((int) mongoCollection.countDocuments() - 10).forEach((Block<? super Profile>) profile -> profiles.add(profile));
-        return profiles;
+       return mongoCollection
+               .find()
+               .skip((int) mongoCollection.countDocuments() - 10)
+               .into(new ArrayList<>());
     }
 
     public List<Profile> getProfilesByCarMake(String carMake) {
-        mongoCollection.find(eq("car.make", carMake)).forEach((Block<? super Profile>) profile -> profiles.add(profile));
-        return profiles;
+        return mongoCollection
+                .find(eq("car.make", carMake))
+                .into(new ArrayList<>());
     }
 
     public List<Profile> getProfilesByPostcode(String postcode) {
-        mongoCollection.find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode))).forEach((Block<? super Profile>) profile -> profiles.add(profile));
-        return profiles;
+        return mongoCollection
+                .find(regex("address.postcode", "^(?i)"+Pattern.quote(postcode)))
+                .into(new ArrayList<>());
     }
 
 }

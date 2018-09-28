@@ -18,48 +18,44 @@ import java.util.List;
 
 public class Entry {
 
+    private static final String COLLECTION_ADDRESSES = "addresses";
+    private static final String COLLECTION_PROFILES = "profiles";
+    private static final String DATABASE = "msm-training";
+    private static final String CSV_MOCK_DATA = "MOCK_DATA";
+
     public static void main (String[] args) throws IOException, InterruptedException {
         FileUtil fileUtil = new FileUtil();
+
         MongoProperties mongoProperties = MongoProperties.builder()
-            .collection("profiles")
-            .database("msm-training")
+            .collection(COLLECTION_PROFILES)
+            .database(DATABASE)
             .build();
 
         MongoConnection mongoConnection = new MongoConnection(mongoProperties);
         mongoConnection.dropDatabase();
+        Thread.sleep(1000);
+
+        // Part One
         ProfileDao profileDao = new ProfileDao(mongoConnection.createProfileCollection());
-        CsvDao csvDao = new CsvDao(new FileReader(fileUtil.getCsvFile("MOCK_DATA")));
+        CsvDao csvDao = new CsvDao(new FileReader(fileUtil.getCsvFile(CSV_MOCK_DATA)));
         List<Profile> profilesFromCSV = csvDao.getProfilesFromCSV();
+        profilesFromCSV.forEach(csvProfile -> profileDao.save(csvProfile));
+        System.out.println("\n\n");
+        System.out.println(profileDao.getAll()); // Part One
+        System.out.println("\n\n");
+        System.out.println(profileDao.getLastTenProfiles()); // Part Two
+        System.out.println("\n\n");
+        System.out.println(profileDao.getProfilesByCarMake("BMW")); // Part Three
+        System.out.println("\n\n");
+        System.out.println(profileDao.getProfilesByPostcode("sk11")); // Part Four
 
-        profilesFromCSV.forEach(profile -> {
-            profileDao.save(profile);
-        });
-
-        System.out.println("***************************** PART TWO ***************************\n\n");
-        System.out.println(profileDao.getAll());
-        System.out.println("\n\n*********************  END OF PART TWO ***********************\n\n");
-
-        System.out.println("\n\n************************* PART THREE ***************************");
-        System.out.println(profileDao.getLastTenProfiles());
-        System.out.println("\n\n********************** END OF PART THREE ***********************\n\n");
-
-        System.out.println("**************************** PART FOUR ***************************\n\n");
-        System.out.println(profileDao.getProfilesByCarMake("BMW"));
-        System.out.println("\n\n*********************** END OF PART FOUR ***********************\n\n");
-
-        System.out.println("****************************  PART FIVE ***************************\n\n");
-        System.out.println(profileDao.getProfilesByPostcode("SK11"));
-        System.out.println("\n\n*********************  END OF PART FIVE ***********************\n\n");
-
-        mongoProperties = MongoProperties.builder()
-            .collection("addresses")
-            .database("msm-training")
-            .build();
+        // Part Five
+        mongoProperties.setCollection(COLLECTION_ADDRESSES);
 
         mongoConnection = new MongoConnection(mongoProperties);
         AddressDao addressDao = new AddressDao(mongoConnection.createAddressCollection());
 
-        List<Profile> mongoProfiles = new LinkedList<>();
+        List<Profile> mongoProfiles = profileDao.getAll();
         mongoProfiles.forEach(profile -> addressDao.save(profile.getAddress()));
 
         Thread.sleep(1000);

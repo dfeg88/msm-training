@@ -2,14 +2,13 @@ package com.moneysupermarket.milestonetwo.dao;
 
 import com.moneysupermarket.milestonetwo.models.Address;
 import com.mongodb.Block;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class AddressDao implements GenericDao<Address> {
-    private Block<Address> printBlock = System.out::println;
-
     private MongoCollection<Address> mongoCollection;
 
     public AddressDao(MongoCollection<Address> mongoCollection) {
@@ -21,11 +20,6 @@ public class AddressDao implements GenericDao<Address> {
     }
 
     public List<Address> getAll() {
-        getAddresses().forEach(printBlock);
-        return null;
-    }
-
-    private FindIterable<Address> getAddresses() {
-        return mongoCollection.find();
+        return mongoCollection.find().into(new ArrayList<>());
     }
 }
