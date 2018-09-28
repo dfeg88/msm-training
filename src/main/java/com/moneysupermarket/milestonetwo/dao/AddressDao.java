@@ -11,7 +11,7 @@ import java.util.List;
 public class AddressDao implements GenericDao<Address> {
     private MongoCollection<Address> mongoCollection;
 
-    public AddressDao(MongoCollection<Address> mongoCollection) {
+    public AddressDao(MongoCollection mongoCollection) {
         this.mongoCollection = mongoCollection;
     }
 

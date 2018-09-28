@@ -39,23 +39,21 @@ public class Entry {
         ProfileDao profileDao = new ProfileDao(mongoConnection.createProfileCollection());
         CsvDao csvDao = new CsvDao(new FileReader(fileUtil.getCsvFile(CSV_MOCK_DATA)));
         List<Profile> profilesFromCSV = csvDao.getProfilesFromCSV();
-        profilesFromCSV.forEach(csvProfile -> profileDao.save(csvProfile));
-        System.out.println("\n\n");
+        profilesFromCSV.forEach(profileDao::save);
+
+        // Write to console
         System.out.println(profileDao.getAll()); // Part Two
-        System.out.println("\n\n");
         System.out.println(profileDao.getLastTenProfiles()); // Part Three
-        System.out.println("\n\n");
         System.out.println(profileDao.getProfilesByCarMake("BMW")); // Part Four
-        System.out.println("\n\n");
         System.out.println(profileDao.getProfilesByPostcode("sk11")); // Part Five
 
         // Part Six
         mongoProperties.setCollection(COLLECTION_ADDRESSES);
-
         mongoConnection = new MongoConnection(mongoProperties);
-        AddressDao addressDao = new AddressDao(mongoConnection.createAddressCollection());
 
+        AddressDao addressDao = new AddressDao(mongoConnection.createAddressCollection());
         List<Profile> mongoProfiles = profileDao.getAll();
+
         mongoProfiles.forEach(profile -> addressDao.save(profile.getAddress()));
 
         Thread.sleep(1000);
