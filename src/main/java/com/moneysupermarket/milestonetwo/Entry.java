@@ -49,8 +49,6 @@ public class Entry {
 
         // Part Six
         mongoProperties.setCollection(COLLECTION_ADDRESSES);
-        mongoConnection = new MongoConnection(mongoProperties);
-
         AddressDao addressDao = new AddressDao(mongoConnection.createAddressCollection());
         List<Profile> mongoProfiles = profileDao.getAll();
 
